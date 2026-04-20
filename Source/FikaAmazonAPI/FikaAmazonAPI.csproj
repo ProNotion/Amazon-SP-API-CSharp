@@ -29,6 +29,7 @@
     <Compile Remove="ConstructFeed\xsd\**" />
     <EmbeddedResource Remove="ConstructFeed\xsd\**" />
     <None Remove="ConstructFeed\xsd\**" />
+
   </ItemGroup>
 
   <ItemGroup>

@@ -720,10 +720,16 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Services
 
             #endregion
         }
-
+        
+        /// <summary>
+        /// A class that provides URLs for the Replenishment API endpoints.
+        /// </summary>
+        protected class ReplenishmentApi
+        {
+            private static readonly string _resourceBaseUrl = "/replenishment/2022-11-07";
+            public static string GetSellingPartnerMetrics => $"{_resourceBaseUrl}/sellingPartners/metrics/search";
+            public static string ListOfferMetrics => $"{_resourceBaseUrl}/offers/metrics/search";
+            public static string ListOffers => $"{_resourceBaseUrl}/offers/search";
+        }
     }
-
-
-
-
 }

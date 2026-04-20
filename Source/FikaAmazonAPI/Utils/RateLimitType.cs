@@ -243,5 +243,9 @@
         
         VendorDirectFulfillmentInventory_SubmitInventoryUpdate,
 
+        Replenishment_GetSellingPartnerMetrics,
+        Replenishment_ListOfferMetrics,
+        Replenishment_ListOffers,
+
     }
 }
