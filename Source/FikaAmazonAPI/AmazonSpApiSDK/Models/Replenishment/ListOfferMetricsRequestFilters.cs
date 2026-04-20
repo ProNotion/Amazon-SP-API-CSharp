@@ -1,30 +1,47 @@
-using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 
 namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Replenishment
 {
     /// <summary>
-    /// Filters for listOfferMetrics. timeInterval, timePeriodType, programTypes, and marketplaceId are required.
+    /// Use this parameter to filter the results.
     /// </summary>
     public class ListOfferMetricsRequestFilters
     {
-        [JsonProperty("aggregationFrequency")]
+        /// <summary>
+        /// An optional time period used to group data in the response.
+        /// </summary>
+        [DataMember(Name = "aggregationFrequency", EmitDefaultValue = false)]
         public AggregationFrequency? AggregationFrequency { get; set; }
 
-        [JsonProperty("timeInterval")]
+        /// <summary>
+        /// A time interval used to compute metrics.
+        /// </summary>
+        [DataMember(Name = "timeInterval", EmitDefaultValue = false)]
         public TimeInterval TimeInterval { get; set; }
 
-        [JsonProperty("timePeriodType")]
+        /// <summary>
+        /// The time period type that determines whether metrics are backward-looking (performance) or forward-looking (forecast).
+        /// </summary>
+        [DataMember(Name = "timePeriodType", EmitDefaultValue = false)]
         public TimePeriodType TimePeriodType { get; set; }
 
-        [JsonProperty("marketplaceId")]
+        /// <summary>
+        /// Amazon marketplace identifier.
+        /// </summary>
+        [DataMember(Name = "marketplaceId", EmitDefaultValue = false)]
         public string MarketplaceId { get; set; }
 
-        [JsonProperty("programTypes")]
+        /// <summary>
+        /// A list of replenishment program types by which to filter results.
+        /// </summary>
+        [DataMember(Name = "programTypes", EmitDefaultValue = false)]
         public List<ProgramType> ProgramTypes { get; set; }
 
-        /// <summary>1–20 ASINs.</summary>
-        [JsonProperty("asins")]
+        /// <summary>
+        /// A list of ASINs by which to filter results.
+        /// </summary>
+        [DataMember(Name = "asins", EmitDefaultValue = false)]
         public List<string> Asins { get; set; }
     }
 }

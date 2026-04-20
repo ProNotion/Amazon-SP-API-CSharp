@@ -1,17 +1,32 @@
+using System.Runtime.Serialization;
 using Newtonsoft.Json;
 
 namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Replenishment
 {
-    /// <summary>Request body for listOffers.</summary>
+    /// <summary>
+    /// The request body for the listOffers operation.
+    /// </summary>
     public class ListOffersRequest
     {
-        [JsonProperty("pagination")]
+        [JsonConstructor]
+        public ListOffersRequest() { }
+
+        /// <summary>
+        /// Pagination parameters for the response.
+        /// </summary>
+        [DataMember(Name = "pagination", EmitDefaultValue = false)]
         public ListOffersRequestPagination Pagination { get; set; }
 
-        [JsonProperty("filters")]
+        /// <summary>
+        /// Filters to apply to the results.
+        /// </summary>
+        [DataMember(Name = "filters", EmitDefaultValue = false)]
         public ListOffersRequestFilters Filters { get; set; }
 
-        [JsonProperty("sort")]
+        /// <summary>
+        /// Sort options for the results.
+        /// </summary>
+        [DataMember(Name = "sort", EmitDefaultValue = false)]
         public ListOffersRequestSort Sort { get; set; }
     }
 }

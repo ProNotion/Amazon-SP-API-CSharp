@@ -1,18 +1,28 @@
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Replenishment
 {
-    /// <summary>Set of program properties for an offer.</summary>
+    /// <summary>
+    /// The configuration of an offer in the replenishment program.
+    /// </summary>
     public class OfferProgramConfiguration
     {
-        [JsonProperty("preferences")]
+        /// <summary>
+        /// The seller's preferences for the offer.
+        /// </summary>
+        [DataMember(Name = "preferences", EmitDefaultValue = false)]
         public OfferProgramConfigurationPreferences Preferences { get; set; }
 
-        [JsonProperty("promotions")]
+        /// <summary>
+        /// The promotions applied to the offer.
+        /// </summary>
+        [DataMember(Name = "promotions", EmitDefaultValue = false)]
         public OfferProgramConfigurationPromotions Promotions { get; set; }
 
-        /// <summary>Determines whether the offer was automatically or manually enrolled. Sellers only.</summary>
-        [JsonProperty("enrollmentMethod")]
-        public EnrollmentMethod? EnrollmentMethod { get; set; }
+        /// <summary>
+        /// The replenishment program type for the offer.
+        /// </summary>
+        [DataMember(Name = "programType", EmitDefaultValue = false)]
+        public ProgramType? ProgramType { get; set; }
     }
 }

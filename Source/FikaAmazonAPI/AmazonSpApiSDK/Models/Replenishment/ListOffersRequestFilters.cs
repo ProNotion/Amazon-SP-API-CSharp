@@ -1,41 +1,41 @@
-using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 
 namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Replenishment
 {
     /// <summary>
-    /// Filters for listOffers. marketplaceId and programTypes are required; all other fields are optional.
-    /// Note: deliveriesConditions filter and inventory/price sorting were added in the April 2026 release.
+    /// Use this parameter to filter the results.
     /// </summary>
     public class ListOffersRequestFilters
     {
-        [JsonProperty("marketplaceId")]
+        /// <summary>
+        /// Amazon marketplace identifier.
+        /// </summary>
+        [DataMember(Name = "marketplaceId", EmitDefaultValue = false)]
         public string MarketplaceId { get; set; }
 
-        /// <summary>SKU filter (sellers only). 1–20 entries.</summary>
-        [JsonProperty("skus")]
+        /// <summary>
+        /// A list of SKUs by which to filter results.
+        /// </summary>
+        [DataMember(Name = "skus", EmitDefaultValue = false)]
         public List<string> Skus { get; set; }
 
-        /// <summary>ASIN filter. 1–20 entries.</summary>
-        [JsonProperty("asins")]
+        /// <summary>
+        /// A list of ASINs by which to filter results.
+        /// </summary>
+        [DataMember(Name = "asins", EmitDefaultValue = false)]
         public List<string> Asins { get; set; }
 
-        [JsonProperty("eligibilities")]
-        public List<EligibilityStatus> Eligibilities { get; set; }
-
-        [JsonProperty("preferences")]
-        public Preference Preferences { get; set; }
-
-        [JsonProperty("promotions")]
-        public Promotion Promotions { get; set; }
-
-        [JsonProperty("programTypes")]
-        public List<ProgramType> ProgramTypes { get; set; }
+        /// <summary>
+        /// A list of eligibility statuses by which to filter results.
+        /// </summary>
+        [DataMember(Name = "eligibilityStatuses", EmitDefaultValue = false)]
+        public List<EligibilityStatus> EligibilityStatuses { get; set; }
 
         /// <summary>
-        /// Delivery condition types to filter by — paused, at-risk, or healthy. Added April 2026.
+        /// A list of replenishment program types by which to filter results.
         /// </summary>
-        [JsonProperty("deliveriesConditions")]
-        public List<DeliveryConditionType> DeliveriesConditions { get; set; }
+        [DataMember(Name = "programTypes", EmitDefaultValue = false)]
+        public List<ProgramType> ProgramTypes { get; set; }
     }
 }

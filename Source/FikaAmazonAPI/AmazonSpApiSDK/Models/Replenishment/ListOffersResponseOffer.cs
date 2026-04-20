@@ -1,58 +1,83 @@
-using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 
 namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Replenishment
 {
-    /// <summary>Details about an offer returned by listOffers.</summary>
+    /// <summary>
+    /// A replenishment offer and its associated details.
+    /// </summary>
     public class ListOffersResponseOffer
     {
-        /// <summary>SKU. Sellers only.</summary>
-        [JsonProperty("sku")]
-        public string Sku { get; set; }
-
-        [JsonProperty("asin")]
+        /// <summary>
+        /// The Amazon Standard Identification Number (ASIN) of the offer.
+        /// </summary>
+        [DataMember(Name = "asin", EmitDefaultValue = false)]
         public string Asin { get; set; }
 
-        [JsonProperty("marketplaceId")]
+        /// <summary>
+        /// Amazon marketplace identifier.
+        /// </summary>
+        [DataMember(Name = "marketplaceId", EmitDefaultValue = false)]
         public string MarketplaceId { get; set; }
 
-        [JsonProperty("eligibility")]
-        public EligibilityStatus? Eligibility { get; set; }
+        /// <summary>
+        /// The eligibility status of the offer in the replenishment program.
+        /// </summary>
+        [DataMember(Name = "eligibilityStatus", EmitDefaultValue = false)]
+        public EligibilityStatus? EligibilityStatus { get; set; }
 
-        [JsonProperty("offerProgramConfiguration")]
+        /// <summary>
+        /// The program configuration for the offer.
+        /// </summary>
+        [DataMember(Name = "offerProgramConfiguration", EmitDefaultValue = false)]
         public OfferProgramConfiguration OfferProgramConfiguration { get; set; }
 
-        [JsonProperty("programType")]
+        /// <summary>
+        /// The replenishment program type for the offer.
+        /// </summary>
+        [DataMember(Name = "programType", EmitDefaultValue = false)]
         public ProgramType? ProgramType { get; set; }
 
-        [JsonProperty("vendorCodes")]
+        /// <summary>
+        /// A list of vendor codes associated with the offer.
+        /// </summary>
+        [DataMember(Name = "vendorCodes", EmitDefaultValue = false)]
         public List<string> VendorCodes { get; set; }
 
-        /// <summary>Listed price amount for the item.</summary>
-        [JsonProperty("price")]
-        public double? Price { get; set; }
+        /// <summary>
+        /// The method by which the offer was enrolled in the replenishment program.
+        /// </summary>
+        [DataMember(Name = "enrollmentMethod", EmitDefaultValue = false)]
+        public EnrollmentMethod? EnrollmentMethod { get; set; }
 
-        [JsonProperty("priceCurrencyCode")]
-        public string PriceCurrencyCode { get; set; }
+        /// <summary>
+        /// The lowest number of days of supply forecasted over the next 90 days.
+        /// </summary>
+        [DataMember(Name = "lowestDaysSupplyOverNextNinetyDays", EmitDefaultValue = false)]
+        public int? LowestDaysSupplyOverNextNinetyDays { get; set; }
 
-        [JsonProperty("inventory")]
-        public long? Inventory { get; set; }
+        /// <summary>
+        /// The forecasted P70 days of supply.
+        /// </summary>
+        [DataMember(Name = "forecastedP70DaysOfSupply", EmitDefaultValue = false)]
+        public int? ForecastedP70DaysOfSupply { get; set; }
 
-        /// <summary>Stock risk level — risk of going out of stock.</summary>
-        [JsonProperty("stockRisk")]
-        public string StockRisk { get; set; }
+        /// <summary>
+        /// The forecasted P80 days of supply.
+        /// </summary>
+        [DataMember(Name = "forecastedP80DaysOfSupply", EmitDefaultValue = false)]
+        public int? ForecastedP80DaysOfSupply { get; set; }
 
-        /// <summary>Per-condition delivery health for the next 30 days.</summary>
-        [JsonProperty("deliveriesConditions")]
-        public List<DeliveriesCondition> DeliveriesConditions { get; set; }
+        /// <summary>
+        /// The forecasted P90 days of supply.
+        /// </summary>
+        [DataMember(Name = "forecastedP90DaysOfSupply", EmitDefaultValue = false)]
+        public int? ForecastedP90DaysOfSupply { get; set; }
 
-        [JsonProperty("subscriptions")]
-        public long? Subscriptions { get; set; }
-
-        [JsonProperty("fulfillmentNetworkIDType")]
-        public string FulfillmentNetworkIDType { get; set; }
-
-        [JsonProperty("forecastDeliveries")]
-        public ForecastDeliveries ForecastDeliveries { get; set; }
+        /// <summary>
+        /// A list of forecasted deliveries for the offer.
+        /// </summary>
+        [DataMember(Name = "forecastDeliveries", EmitDefaultValue = false)]
+        public List<ForecastDelivery> ForecastDeliveries { get; set; }
     }
 }

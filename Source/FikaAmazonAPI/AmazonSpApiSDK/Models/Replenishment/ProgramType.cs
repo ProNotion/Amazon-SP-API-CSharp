@@ -3,10 +3,13 @@ using Newtonsoft.Json.Converters;
 
 namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Replenishment
 {
-    /// <summary>The replenishment program type.</summary>
+    /// <summary>
+    /// The replenishment program type.
+    /// </summary>
     [JsonConverter(typeof(StringEnumConverter))]
     public enum ProgramType
     {
+        /// <summary>The Subscribe and Save replenishment program.</summary>
         SUBSCRIBE_AND_SAVE
     }
 }
