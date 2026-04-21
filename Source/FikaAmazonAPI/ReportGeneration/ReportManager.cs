@@ -437,9 +437,15 @@ namespace FikaAmazonAPI.ReportGeneration
 
         #region Settlement
 
+        /// <summary>
+        /// Returns ledger detail rows for the specified number of trailing days. Capped at 90 days.
+        /// </summary>
+        /// <param name="days">Number of days to look back from today.</param>
+        /// <returns>Parsed ledger detail rows.</returns>
         public List<LedgerDetailReportRow> GetLedgerDetail(int days) =>
             Task.Run(() => GetLedgerDetailAsync(days)).ConfigureAwait(false).GetAwaiter().GetResult();
 
+        /// <inheritdoc cref="GetLedgerDetail(int)"/>
         public async Task<List<LedgerDetailReportRow>> GetLedgerDetailAsync(int days)
         {
             DateTime fromDate = DateTime.UtcNow.AddDays(-1 * days);
@@ -447,25 +453,77 @@ namespace FikaAmazonAPI.ReportGeneration
             return await GetLedgerDetailAsync(fromDate, toDate);
         }
 
+        /// <summary>
+        /// Returns ledger detail rows for the specified date range. Capped at 90 days from today regardless of <paramref name="fromDate"/>.
+        /// </summary>
+        /// <param name="fromDate">Start of the date range (UTC). Clamped to 90 days ago if earlier.</param>
+        /// <param name="toDate">End of the date range (UTC).</param>
+        /// <returns>Parsed ledger detail rows.</returns>
         public async Task<List<LedgerDetailReportRow>> GetLedgerDetailAsync(DateTime fromDate, DateTime toDate)
         {
-            List<LedgerDetailReportRow> list = new List<LedgerDetailReportRow>();
-            var totalDays = (DateTime.UtcNow - fromDate).TotalDays;
-            if (totalDays > 90)
-                fromDate = DateTime.UtcNow.AddDays(-90);
-
-            using var stream = await GetLedgerDetailAsync(_amazonConnection, fromDate, toDate);
-            LedgerDetailReport report = new LedgerDetailReport(stream, _amazonConnection.RefNumber);
-            list.AddRange(report.Data);
-
-            return list;
+            ClampLedgerDateRange(ref fromDate);
+            using var stream = await GetLedgerDetailStreamAsync(_amazonConnection, fromDate, toDate);
+            return new LedgerDetailReport(stream, _amazonConnection.RefNumber).Data;
         }
 
-        private async Task<MemoryStream> GetLedgerDetailAsync(AmazonConnection amazonConnection, DateTime fromDate,
+        /// <summary>
+        /// Returns ledger detail rows for the specified number of trailing days and saves the raw report file to disk. Capped at 90 days.
+        /// </summary>
+        /// <param name="days">Number of days to look back from today.</param>
+        /// <param name="downloadPath">Full file path where the raw report will be saved.</param>
+        /// <returns>Parsed ledger detail rows.</returns>
+        public List<LedgerDetailReportRow> GetLedgerDetail(int days, string downloadPath) =>
+            Task.Run(() => GetLedgerDetailAsync(days, downloadPath)).ConfigureAwait(false).GetAwaiter().GetResult();
+
+        /// <inheritdoc cref="GetLedgerDetail(int, string)"/>
+        public async Task<List<LedgerDetailReportRow>> GetLedgerDetailAsync(int days, string downloadPath)
+        {
+            DateTime fromDate = DateTime.UtcNow.AddDays(-1 * days);
+            DateTime toDate = DateTime.UtcNow;
+            return await GetLedgerDetailAsync(fromDate, toDate, downloadPath);
+        }
+
+        /// <summary>
+        /// Returns ledger detail rows for the specified date range and saves the raw report file to disk.
+        /// Capped at 90 days from today regardless of <paramref name="fromDate"/>.
+        /// </summary>
+        /// <param name="fromDate">Start of the date range (UTC). Clamped to 90 days ago if earlier.</param>
+        /// <param name="toDate">End of the date range (UTC).</param>
+        /// <param name="downloadPath">Full file path where the raw report will be saved.</param>
+        /// <returns>Parsed ledger detail rows.</returns>
+        public async Task<List<LedgerDetailReportRow>> GetLedgerDetailAsync(DateTime fromDate, DateTime toDate, string downloadPath)
+        {
+            ClampLedgerDateRange(ref fromDate);
+            var path = await GetLedgerDetailFileAsync(_amazonConnection, downloadPath, fromDate, toDate);
+            return new LedgerDetailReport(path, _amazonConnection.RefNumber).Data;
+        }
+
+        /// <summary>
+        /// Clamps <paramref name="fromDate"/> to a maximum of 90 days ago.
+        /// The Amazon SP-API <c>GET_LEDGER_DETAIL_VIEW_DATA</c> report does not support a date range
+        /// exceeding 90 days, so any earlier start date is silently moved forward to that limit.
+        /// </summary>
+        private static void ClampLedgerDateRange(ref DateTime fromDate)
+        {
+            if ((DateTime.UtcNow - fromDate).TotalDays > 90)
+                fromDate = DateTime.UtcNow.AddDays(-90);
+        }
+
+        private async Task<MemoryStream> GetLedgerDetailStreamAsync(AmazonConnection amazonConnection, DateTime fromDate,
             DateTime toDate)
         {
             return await amazonConnection.Reports.CreateReportAndDownloadFileStreamAsync(
                 ReportTypes.GET_LEDGER_DETAIL_VIEW_DATA, fromDate, toDate);
+        }
+
+        private async Task<string> GetLedgerDetailFileAsync(AmazonConnection amazonConnection, string downloadPath,
+            DateTime fromDate, DateTime toDate)
+        {
+            using var stream = await amazonConnection.Reports.CreateReportAndDownloadFileStreamAsync(
+                ReportTypes.GET_LEDGER_DETAIL_VIEW_DATA, fromDate, toDate);
+            using var fileStream = File.Create(downloadPath);
+            await stream.CopyToAsync(fileStream);
+            return downloadPath;
         }
 
         #endregion
