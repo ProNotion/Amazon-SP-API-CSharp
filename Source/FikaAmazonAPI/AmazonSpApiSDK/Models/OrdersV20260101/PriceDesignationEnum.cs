@@ -1,9 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using System;
-using System.Collections.Generic;
 using System.Runtime.Serialization;
-using System.Text;
+
 
 namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
 {
@@ -19,6 +17,12 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
         /// </summary>
         [EnumMember(Value = "BUSINESS_PRICE")]
         BUSINESS_PRICE = 1,
+
+        /// <summary>
+        /// Enum value for type QUANTITY_PRICE
+        /// </summary>
+        [EnumMember(Value = "QUANTITY_PRICE")]
+        QUANTITY_PRICE = 2
     }
 
 }
