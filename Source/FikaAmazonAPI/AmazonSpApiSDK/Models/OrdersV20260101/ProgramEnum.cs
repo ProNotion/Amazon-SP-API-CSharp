@@ -73,6 +73,12 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
         /// </summary>
         [EnumMember(Value = "PRIME")]
         PRIME = 10,
+
+        /// <summary>
+        /// Enum value for type INVOICE_BY_AMAZON
+        /// </summary>
+        [EnumMember(Value = "INVOICE_BY_AMAZON")]
+        INVOICE_BY_AMAZON = 11
     }
 
 }
