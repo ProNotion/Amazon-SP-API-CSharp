@@ -35,6 +35,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
         /// <param name="promotion">Details about any discounts, coupons, or promotional offers applied to this item.</param>
         /// <param name="cancellation">The cancellation information of the order item.</param>
         /// <param name="fulfillment">Information about how the order item should be processed, packed, and shipped to the customer.</param>
+        /// <param name="tax">Tax information associated with this specific order item.</param>
         public OrderItem(string orderItemId,
                          int quantityOrdered,
                          Measurement measurement,
@@ -44,7 +45,8 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
                          Expense expense,
                          Promotion promotion,
                          Cancellation cancellation,
-                         OrderItemFulfillment fulfillment)
+                         OrderItemFulfillment fulfillment,
+                         OrderItemTax tax)
         {
             this.OrderItemId = orderItemId;
             this.QuantityOrdered = quantityOrdered;
@@ -56,6 +58,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
             this.Promotion = promotion;
             this.Cancellation = cancellation;
             this.Fulfillment = fulfillment;
+            this.Tax = tax;
         }
 
         /// <summary>
@@ -128,6 +131,14 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
         [DataMember(Name = "fulfillment", EmitDefaultValue = false)]
         public OrderItemFulfillment Fulfillment { get; set; }
 
+        /// <summary>
+        /// Tax information associated with this specific order item,
+        /// including the responsible party and the tax collection model.
+        /// </summary>
+        /// <value>Tax information associated with this specific order item.</value>
+        [DataMember(Name = "tax", EmitDefaultValue = false)]
+        public OrderItemTax Tax { get; set; }
+
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -147,6 +158,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
             sb.Append("  Promotion: ").Append(Promotion).Append("\n");
             sb.Append("  Cancellation: ").Append(Cancellation).Append("\n");
             sb.Append("  Fulfillment: ").Append(Fulfillment).Append("\n");
+            sb.Append("  Tax: ").Append(Tax).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -230,6 +242,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
                     this.Fulfillment == input.Fulfillment ||
                     (this.Fulfillment != null &&
                     this.Fulfillment.Equals(input.Fulfillment))
+                ) &&
+                (
+                    this.Tax == input.Tax ||
+                    (this.Tax != null &&
+                    this.Tax.Equals(input.Tax))
                 );
         }
 
@@ -262,6 +279,8 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
                     hashCode = hashCode * 59 + this.Cancellation.GetHashCode();
                 if (this.Fulfillment != null)
                     hashCode = hashCode * 59 + this.Fulfillment.GetHashCode();
+                if (this.Tax != null)
+                    hashCode = hashCode * 59 + this.Tax.GetHashCode();
                 return hashCode;
             }
         }
