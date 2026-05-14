@@ -62,6 +62,17 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
         [EnumMember(Value = "PACKAGES")]
         PACKAGES = 8,
 
+        /// <summary>
+        /// Information about tax
+        /// </summary>
+        [EnumMember(Value = "TAX")]
+        TAX = 9,
+
+        /// <summary>
+        /// Information about payment
+        /// </summary>
+        [EnumMember(Value = "PAYMENT")]
+        PAYMENT = 10,
     }
 
 }
