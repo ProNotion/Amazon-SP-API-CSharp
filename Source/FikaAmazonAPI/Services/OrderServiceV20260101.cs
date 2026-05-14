@@ -56,7 +56,10 @@ namespace FikaAmazonAPI.Services
             return list;
         }
 
-        private async Task<SearchOrdersResponse> SearchOrdersByNextTokenAsync(ParameterSearchOrders parameterSearchOrders, CancellationToken cancellationToken = default)
+        public SearchOrdersResponse SearchOrdersByNextToken(ParameterSearchOrders parameterSearchOrders) =>
+            Task.Run(() => SearchOrdersByNextTokenAsync(parameterSearchOrders)).ConfigureAwait(false).GetAwaiter().GetResult();
+
+        public async Task<SearchOrdersResponse> SearchOrdersByNextTokenAsync(ParameterSearchOrders parameterSearchOrders, CancellationToken cancellationToken = default)
         {
             var parameter = parameterSearchOrders.getParameters();
 
