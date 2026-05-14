@@ -241,6 +241,13 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
         public CreateFulfillmentOrderItemList Items { get; set; }
 
         /// <summary>
+        /// A list of features and their fulfillment policies to apply to the order. Use this to opt in/out of Multi-Channel Fulfillment features such as BLOCK_AMZL or BLANK_BOX.
+        /// </summary>
+        /// <value>A list of features and their fulfillment policies to apply to the order.</value>
+        [DataMember(Name = "featureConstraints", EmitDefaultValue = false)]
+        public List<FeatureSettings> FeatureConstraints { get; set; }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -264,6 +271,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
             sb.Append("  ShipFromCountryCode: ").Append(ShipFromCountryCode).Append("\n");
             sb.Append("  NotificationEmails: ").Append(NotificationEmails).Append("\n");
             sb.Append("  Items: ").Append(Items).Append("\n");
+            sb.Append("  FeatureConstraints: ").Append(FeatureConstraints).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -369,6 +377,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
                     this.Items == input.Items ||
                     (this.Items != null &&
                     this.Items.Equals(input.Items))
+                ) &&
+                (
+                    this.FeatureConstraints == input.FeatureConstraints ||
+                    (this.FeatureConstraints != null &&
+                    this.FeatureConstraints.Equals(input.FeatureConstraints))
                 );
         }
 
@@ -411,6 +424,8 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
                     hashCode = hashCode * 59 + this.NotificationEmails.GetHashCode();
                 if (this.Items != null)
                     hashCode = hashCode * 59 + this.Items.GetHashCode();
+                if (this.FeatureConstraints != null)
+                    hashCode = hashCode * 59 + this.FeatureConstraints.GetHashCode();
                 return hashCode;
             }
         }
