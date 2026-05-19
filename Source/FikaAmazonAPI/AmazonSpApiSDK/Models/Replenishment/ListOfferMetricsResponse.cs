@@ -1,23 +1,15 @@
+using Newtonsoft.Json;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
 
 namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Replenishment
 {
-    /// <summary>
-    /// The response body for the listOfferMetrics operation.
-    /// </summary>
+    /// <summary>Response schema for listOfferMetrics.</summary>
     public class ListOfferMetricsResponse
     {
-        /// <summary>
-        /// A list of offers and their associated replenishment metrics.
-        /// </summary>
-        [DataMember(Name = "offers", EmitDefaultValue = false)]
+        [JsonProperty("offers")]
         public List<ListOfferMetricsResponseOffer> Offers { get; set; }
 
-        /// <summary>
-        /// Pagination details for the response.
-        /// </summary>
-        [DataMember(Name = "pagination", EmitDefaultValue = false)]
+        [JsonProperty("pagination")]
         public PaginationResponse Pagination { get; set; }
     }
 }

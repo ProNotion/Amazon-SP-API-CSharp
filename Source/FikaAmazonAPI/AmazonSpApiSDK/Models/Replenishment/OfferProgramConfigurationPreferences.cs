@@ -1,16 +1,11 @@
-using System.Runtime.Serialization;
+using Newtonsoft.Json;
 
 namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Replenishment
 {
-    /// <summary>
-    /// The seller's preferences for the replenishment program offer.
-    /// </summary>
+    /// <summary>Preferences applied to an offer.</summary>
     public class OfferProgramConfigurationPreferences
     {
-        /// <summary>
-        /// The seller's preference for automatic enrollment in the replenishment program.
-        /// </summary>
-        [DataMember(Name = "automationStatus", EmitDefaultValue = false)]
-        public AutoEnrollmentPreference? AutomationStatus { get; set; }
+        [JsonProperty("autoEnrollment")]
+        public AutoEnrollmentPreference? AutoEnrollment { get; set; }
     }
 }

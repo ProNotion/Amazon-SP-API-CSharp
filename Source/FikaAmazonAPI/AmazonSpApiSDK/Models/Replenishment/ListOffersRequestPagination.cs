@@ -1,22 +1,14 @@
-using System.Runtime.Serialization;
+using Newtonsoft.Json;
 
 namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Replenishment
 {
-    /// <summary>
-    /// Use this parameter to paginate through the response.
-    /// </summary>
+    /// <summary>Pagination for listOffers (limit 1–100, offset 0–9000).</summary>
     public class ListOffersRequestPagination
     {
-        /// <summary>
-        /// The number of results to return per page.
-        /// </summary>
-        [DataMember(Name = "numberOfResults", EmitDefaultValue = false)]
-        public int? NumberOfResults { get; set; }
+        [JsonProperty("limit")]
+        public long Limit { get; set; } = 100;
 
-        /// <summary>
-        /// The token to retrieve the next page of results.
-        /// </summary>
-        [DataMember(Name = "nextToken", EmitDefaultValue = false)]
-        public string NextToken { get; set; }
+        [JsonProperty("offset")]
+        public long Offset { get; set; } = 0;
     }
 }

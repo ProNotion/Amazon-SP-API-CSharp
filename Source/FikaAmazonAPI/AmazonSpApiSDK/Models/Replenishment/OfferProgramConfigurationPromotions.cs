@@ -1,22 +1,20 @@
-using System.Runtime.Serialization;
+using Newtonsoft.Json;
 
 namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Replenishment
 {
-    /// <summary>
-    /// The promotions applied to a replenishment program offer.
-    /// </summary>
+    /// <summary>All promotions applied to an offer.</summary>
     public class OfferProgramConfigurationPromotions
     {
-        /// <summary>
-        /// The seller-funded base discount percentage applied to the offer.
-        /// </summary>
-        [DataMember(Name = "sellerFundedBaseDiscount", EmitDefaultValue = false)]
-        public decimal? SellerFundedBaseDiscount { get; set; }
+        [JsonProperty("sellingPartnerFundedBaseDiscount")]
+        public OfferProgramConfigurationPromotionsDiscountFunding SellingPartnerFundedBaseDiscount { get; set; }
 
-        /// <summary>
-        /// The seller-funded tiered discount percentage applied to the offer.
-        /// </summary>
-        [DataMember(Name = "sellerFundedTieredDiscount", EmitDefaultValue = false)]
-        public decimal? SellerFundedTieredDiscount { get; set; }
+        [JsonProperty("sellingPartnerFundedTieredDiscount")]
+        public OfferProgramConfigurationPromotionsDiscountFunding SellingPartnerFundedTieredDiscount { get; set; }
+
+        [JsonProperty("amazonFundedBaseDiscount")]
+        public OfferProgramConfigurationPromotionsDiscountFunding AmazonFundedBaseDiscount { get; set; }
+
+        [JsonProperty("amazonFundedTieredDiscount")]
+        public OfferProgramConfigurationPromotionsDiscountFunding AmazonFundedTieredDiscount { get; set; }
     }
 }
