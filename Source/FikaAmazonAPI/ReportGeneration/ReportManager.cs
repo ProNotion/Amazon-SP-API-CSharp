@@ -77,6 +77,27 @@ namespace FikaAmazonAPI.ReportGeneration
             return report.Data;
         }
 
+        /// <summary>
+        /// Returns reimbursement rows for the specified date range and saves the raw report to disk.
+        /// </summary>
+        /// <param name="fromDate">Start of the date range.</param>
+        /// <param name="toDate">End of the date range.</param>
+        /// <param name="downloadPath">Full file path where the raw report will be saved.</param>
+        public async Task<IList<ReimbursementsOrderRow>> GetReimbursementsOrderAsync(DateTime fromDate, DateTime toDate, string downloadPath)
+        {
+            using var memStream = await GetReimbursementsOrderAsync(_amazonConnection, fromDate, toDate);
+            if (!string.IsNullOrEmpty(downloadPath))
+            {
+                Directory.CreateDirectory(Path.GetDirectoryName(downloadPath)!);
+                memStream.Position = 0;
+                using (var fileStream = File.Create(downloadPath))
+                    await memStream.CopyToAsync(fileStream);
+                memStream.Position = 0;
+            }
+            ReimbursementsOrderReport report = new ReimbursementsOrderReport(memStream, _amazonConnection.RefNumber);
+            return report.Data;
+        }
+
         private async Task<MemoryStream> GetReimbursementsOrderAsync(AmazonConnection amazonConnection, DateTime fromDate,
             DateTime toDate)
         {
@@ -356,6 +377,34 @@ namespace FikaAmazonAPI.ReportGeneration
             {
                 using var stream = await GetOrdersByOrderDateAsync(_amazonConnection, range.StartDate, range.EndDate);
                 OrdersReport report = new OrdersReport(stream, _amazonConnection.RefNumber);
+                list.AddRange(report.Data);
+            }
+
+            return list;
+        }
+
+        /// <summary>
+        /// Returns order rows for the specified date range and saves each chunk's raw report to disk.
+        /// </summary>
+        /// <param name="fromDate">Start of the date range.</param>
+        /// <param name="toDate">End of the date range.</param>
+        /// <param name="downloadPath">Full file path where the raw report will be saved.</param>
+        public async Task<List<OrdersRow>> GetOrdersByOrderDateAsync(DateTime fromDate, DateTime toDate, string downloadPath)
+        {
+            List<OrdersRow> list = new List<OrdersRow>();
+            var dateList = ReportDateRange.GetDateRange(fromDate, toDate, DAY_30);
+            foreach (var range in dateList)
+            {
+                using var memStream = await GetOrdersByOrderDateAsync(_amazonConnection, range.StartDate, range.EndDate);
+                if (!string.IsNullOrEmpty(downloadPath))
+                {
+                    Directory.CreateDirectory(Path.GetDirectoryName(downloadPath)!);
+                    memStream.Position = 0;
+                    using (var fileStream = File.Create(downloadPath))
+                        await memStream.CopyToAsync(fileStream);
+                    memStream.Position = 0;
+                }
+                OrdersReport report = new OrdersReport(memStream, _amazonConnection.RefNumber);
                 list.AddRange(report.Data);
             }
 
