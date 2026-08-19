@@ -254,6 +254,44 @@ namespace FikaAmazonAPI.Utils
               
               { RateLimitType.VendorDirectFulfillmentInventory_SubmitInventoryUpdate, new RateLimits(10M, 10) },
 
+              { RateLimitType.VendorDirectFulfillmentPayments_SubmitInvoice,         new RateLimits(10M, 10) },
+
+              { RateLimitType.VendorDirectFulfillmentTransactions_GetTransactionStatus, new RateLimits(10M, 10) },
+
+              { RateLimitType.VendorDirectFulfillmentShipping_GetShippingLabels,             new RateLimits(10M, 10) },
+              { RateLimitType.VendorDirectFulfillmentShipping_SubmitShippingLabelRequest,    new RateLimits(10M, 10) },
+              { RateLimitType.VendorDirectFulfillmentShipping_GetShippingLabel,              new RateLimits(10M, 10) },
+              { RateLimitType.VendorDirectFulfillmentShipping_SubmitShipmentConfirmations,   new RateLimits(10M, 10) },
+              { RateLimitType.VendorDirectFulfillmentShipping_SubmitShipmentStatusUpdates,   new RateLimits(10M, 10) },
+              { RateLimitType.VendorDirectFulfillmentShipping_GetCustomerInvoices,           new RateLimits(10M, 10) },
+              { RateLimitType.VendorDirectFulfillmentShipping_GetCustomerInvoice,            new RateLimits(10M, 10) },
+              { RateLimitType.VendorDirectFulfillmentShipping_GetPackingSlips,               new RateLimits(10M, 10) },
+              { RateLimitType.VendorDirectFulfillmentShipping_GetPackingSlip,                new RateLimits(10M, 10) },
+
+              { RateLimitType.VendorShipments_SubmitShipmentConfirmations,   new RateLimits(10M, 10) },
+              { RateLimitType.VendorShipments_SubmitShipments,               new RateLimits(10M, 10) },
+              { RateLimitType.VendorShipments_GetShipmentDetails,            new RateLimits(10M, 10) },
+              { RateLimitType.VendorShipments_GetShipmentLabels,             new RateLimits(10M, 10) },
+
+              { RateLimitType.VendorInvoices_SubmitInvoices,                 new RateLimits(10M, 10) },
+
+              { RateLimitType.DataKiosk_GetQueries,     new RateLimits(0.0222M, 10) },
+              { RateLimitType.DataKiosk_CreateQuery,    new RateLimits(0.0167M, 15) },
+              { RateLimitType.DataKiosk_CancelQuery,    new RateLimits(0.0222M, 10) },
+              { RateLimitType.DataKiosk_GetQuery,       new RateLimits(0.0222M, 10) },
+              { RateLimitType.DataKiosk_GetDocument,    new RateLimits(0.0167M, 15) },
+
+              { RateLimitType.ExternalFulfillmentShipment_GetShipments,              new RateLimits(2.0M, 5) },
+              { RateLimitType.ExternalFulfillmentShipment_GetShipment,               new RateLimits(2.0M, 5) },
+              { RateLimitType.ExternalFulfillmentShipment_ProcessShipment,           new RateLimits(1.0M, 5) },
+              { RateLimitType.ExternalFulfillmentShipment_CreatePackages,            new RateLimits(1.0M, 5) },
+              { RateLimitType.ExternalFulfillmentShipment_UpdatePackage,             new RateLimits(1.0M, 5) },
+              { RateLimitType.ExternalFulfillmentShipment_RetrieveShippingOptions,   new RateLimits(1.0M, 5) },
+              { RateLimitType.ExternalFulfillmentShipment_GenerateShipLabels,        new RateLimits(1.0M, 5) },
+              { RateLimitType.ExternalFulfillmentShipment_GenerateInvoice,           new RateLimits(1.0M, 5) },
+              { RateLimitType.ExternalFulfillmentShipment_RetrieveInvoice,           new RateLimits(1.0M, 5) },
+              { RateLimitType.ExternalFulfillmentShipment_UpdatePackageStatus,       new RateLimits(1.0M, 5) },
+
               { RateLimitType.Service_GetServiceJobByServiceJobId,       new RateLimits(20.0M, 40) },
               { RateLimitType.Service_GetServiceJobs,                    new RateLimits(10.0M, 40) },
               { RateLimitType.Service_CancelServiceJobByServiceJobId,    new RateLimits(5.0M, 20) },

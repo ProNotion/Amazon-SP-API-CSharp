@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Runtime.CompilerServices;
+using System.Threading;
 using System.Threading.Tasks;
 
 [assembly: InternalsVisibleTo("Tests")]
@@ -11,6 +12,15 @@ namespace FikaAmazonAPI.Utils
         internal int Burst { get; set; }
         internal DateTime LastRequest { get; set; }
         internal int RequestsSent { get; set; }
+
+        /// <summary>
+        /// A single shared <see cref="RateLimits"/> instance is reused for every concurrent request of the
+        /// same <see cref="RateLimitType"/>. Without serialization, parallel calls race on <see cref="RequestsSent"/>
+        /// and <see cref="LastRequest"/> — each thread that sees a full bucket advances <see cref="LastRequest"/>
+        /// further into the future, so the wait target keeps receding and the limiter never recovers until the
+        /// process is restarted. The gate forces one request through the token-bucket logic at a time.
+        /// </summary>
+        private readonly SemaphoreSlim _gate = new SemaphoreSlim(1, 1);
 
         /// <summary>
         /// Constructor for rate limits configuration object
@@ -36,6 +46,22 @@ namespace FikaAmazonAPI.Utils
         /// <param name="cancellationToken">The cancellation token</param>
         /// <returns></returns>
         public async Task<RateLimits> NextRate(RateLimitType rateLimitType)
+        {
+            // Serialize access so concurrent requests for the same rate limit type cannot corrupt the
+            // shared token-bucket state (see _gate). Each rate limit type owns its own instance/gate, so
+            // requests to different resources are unaffected.
+            await _gate.WaitAsync();
+            try
+            {
+                return await NextRateCore(rateLimitType);
+            }
+            finally
+            {
+                _gate.Release();
+            }
+        }
+
+        private async Task<RateLimits> NextRateCore(RateLimitType rateLimitType)
         {
             if (RequestsSent < 0)
                 RequestsSent = 0;

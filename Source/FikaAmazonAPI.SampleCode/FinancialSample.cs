@@ -65,7 +65,7 @@ namespace FikaAmazonAPI.SampleCode
                 new Parameter.Finance.ParameterListFinancialTransactions20240619()
                 {
                     postedAfter = DateTime.UtcNow.AddDays(-30),
-                    relatedIdentifierName = "FINANCIAL_EVENT_GROUP_ID",
+                    relatedIdentifierName = RelatedIdentifier.RelatedIdentifierNameEnum.FINANCIALEVENTGROUPID,
                     relatedIdentifierValue = financialEventGroupId,
                 });
         }

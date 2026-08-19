@@ -37,6 +37,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
         /// <param name="fulfillment">Information about how the order is being processed, packed, and shipped to the customer.</param>
         /// <param name="orderItems">The list of all order items included in this order. (required)</param>
         /// <param name="packages">Shipping packages created for this order, including tracking information. Note: Only available for merchant-fulfilled (FBM) orders.</param>
+        /// <param name="payment">Payment information for the order.</param>
         public Order(string orderId,
                      List<OrderAliase> orderAliases,
                      DateTime createdTime,
@@ -49,7 +50,8 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
                      OrderProceeds proceeds,
                      OrderFulfillment fulfillment,
                      List<OrderItem> orderItems,
-                     List<Package> packages)
+                     List<Package> packages,
+                     OrderPayment payment)
         {
 
             this.OrderId = orderId;
@@ -65,6 +67,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
             this.Proceeds = proceeds;
             this.Fulfillment = fulfillment;
             this.Packages = packages;
+            this.Payment = payment;
         }
 
         /// <summary>
@@ -158,6 +161,13 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
         [DataMember(Name = "packages", EmitDefaultValue = false)]
         public List<Package> Packages { get; set; }
 
+        /// <summary>
+        /// Payment information for the order.
+        /// </summary>
+        /// <value>Payment information for the order.</value>
+        [DataMember(Name = "payment", EmitDefaultValue = false)]
+        public OrderPayment Payment { get; set; }
+
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -180,6 +190,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
             sb.Append("  Fulfillment: ").Append(Fulfillment).Append("\n");
             sb.Append("  OrderItems: ").Append(OrderItems).Append("\n");
             sb.Append("  Packages: ").Append(Packages).Append("\n");
+            sb.Append("  Payment: ").Append(Payment).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -278,6 +289,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
                     Packages == input.Packages ||
                     Packages != null &&
                     Packages.SequenceEqual(input.Packages)
+                ) &&
+                (
+                    Payment == input.Payment ||
+                    Payment != null &&
+                    Payment.Equals(input.Payment)
                 );
         }
 
@@ -316,6 +332,8 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
                     hashCode = hashCode * 59 + OrderItems.GetHashCode();
                 if (Packages != null)
                     hashCode = hashCode * 59 + Packages.GetHashCode();
+                if (Payment != null)
+                    hashCode = hashCode * 59 + Payment.GetHashCode();
                 return hashCode;
             }
         }
