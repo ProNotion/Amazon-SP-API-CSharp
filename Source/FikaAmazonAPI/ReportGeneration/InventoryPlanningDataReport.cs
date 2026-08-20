@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using FikaAmazonAPI.ReportGeneration.ReportDataTable;
@@ -39,6 +39,7 @@ namespace FikaAmazonAPI.ReportGeneration
         public string ProductName { get; set; }
         public string Condition { get; set; }
         public int? Available { get; set; }
+        public int? FcTransfer { get; set; }
         public int? PendingRemovalQuantity { get; set; }
         public int? InvAge181To330Days { get; set; }
         public int? InvAge331To365Days { get; set; }
@@ -49,12 +50,21 @@ namespace FikaAmazonAPI.ReportGeneration
         public int? InvAge91To180Days { get; set; }
         public int? InvAge181To270Days { get; set; }
         public int? InvAge271To365Days { get; set; }
-        public int? InvAge365PlusDays { get; set; }
+        public int? InvAge366To455Days { get; set; }
+        public int? InvAge456PlusDays { get; set; }
         public string Currency { get; set; }
-        public int? QtyToBeChargedLtsf11Mo { get; set; }
-        public int? QtyToBeChargedLtsf12Mo { get; set; }
-        public decimal? ProjectedLtsf11Mo { get; set; }
-        public decimal? EstimatedLtsfNextCharge { get; set; }
+        public int? QtyToBeChargedAis241To270Days { get; set; }
+        public decimal? EstimatedAis241To270Days { get; set; }
+        public int? QtyToBeChargedAis271To300Days { get; set; }
+        public decimal? EstimatedAis271To300Days { get; set; }
+        public int? QtyToBeChargedAis301To330Days { get; set; }
+        public decimal? EstimatedAis301To330Days { get; set; }
+        public int? QtyToBeChargedAis331To365Days { get; set; }
+        public decimal? EstimatedAis331To365Days { get; set; }
+        public int? QtyToBeChargedAis366To455Days { get; set; }
+        public decimal? EstimatedAis366To455Days { get; set; }
+        public int? QtyToBeChargedAis456PlusDays { get; set; }
+        public decimal? EstimatedAis456PlusDays { get; set; }
         public int? UnitsShippedT7 { get; set; }
         public int? UnitsShippedT30 { get; set; }
         public int? UnitsShippedT60 { get; set; }
@@ -74,6 +84,7 @@ namespace FikaAmazonAPI.ReportGeneration
         public string ProductGroup { get; set; }
         public double? StorageVolume { get; set; }
         public string StorageType { get; set; }
+        public string Marketplace { get; set; }
         public string VolumeUnitMeasurement { get; set; }
         public double? ItemVolume { get; set; }
         public decimal? SellThrough { get; set; }
@@ -88,11 +99,26 @@ namespace FikaAmazonAPI.ReportGeneration
         public int? InboundShipped { get; set; }
         public int? InboundReceived { get; set; }
         public int? ReservedQuantity { get; set; }
-        public string NoSaleLast6Months { get; set; }
+        public int? ReservedFcProcessing { get; set; }
+        public int? ReservedCustomerOrder { get; set; }
+        public int? ReservedStaging { get; set; }
+        public int? InventorySupplyAtFba { get; set; }
         public int? UnfulfillableQuantity { get; set; }
         public int? RecommendedRemovalQuantity { get; set; }
         public int? RecommendedSaleDuartionDays { get; set; }
         public decimal? RecommendedSalesPrice { get; set; }
+        public int? RecommendedShipInQuantity { get; set; }
+        public DateTime? RecommendedShipInDate { get; set; }
+        public decimal? HistoricalDaysOfSupply { get; set; }
+        public decimal? ShortTermHistoricalDaysOfSupply { get; set; }
+        public decimal? LongTermHistoricalDaysOfSupply { get; set; }
+        public DateTime? HistoricalDaysOfSupplyLastUpdatedDate { get; set; }
+        public DateTime? InventoryAgeSnapshotDate { get; set; }
+        public int? TotalDaysOfSupplyIncludingOpenShipments { get; set; }
+        public string IsSeasonalInNext3Months { get; set; }
+        public string SeasonName { get; set; }
+        public DateTime? SeasonStartDate { get; set; }
+        public DateTime? SeasonEndDate { get; set; }
         public int? HealthyInventoryLevel { get; set; }
         public string refNumber { get; set; }
 
@@ -106,17 +132,27 @@ namespace FikaAmazonAPI.ReportGeneration
             row.ProductName = rowData.GetString("product-name");
             row.Condition = rowData.GetString("condition");
             row.Available = DataConverter.GetInt(rowData.GetString("available"));
+            row.FcTransfer = DataConverter.GetInt(rowData.GetString("fc-transfer"));
             row.PendingRemovalQuantity = DataConverter.GetInt(rowData.GetString("pending-removal-quantity"));
             row.InvAge0To90Days = DataConverter.GetInt(rowData.GetString("inv-age-0-to-90-days"));
             row.InvAge91To180Days = DataConverter.GetInt(rowData.GetString("inv-age-91-to-180-days"));
             row.InvAge181To270Days = DataConverter.GetInt(rowData.GetString("inv-age-181-to-270-days"));
             row.InvAge271To365Days = DataConverter.GetInt(rowData.GetString("inv-age-271-to-365-days"));
-            row.InvAge365PlusDays = DataConverter.GetInt(rowData.GetString("inv-age-365-plus-days"));
+            row.InvAge366To455Days = DataConverter.GetInt(rowData.GetString("inv-age-366-to-455-days"));
+            row.InvAge456PlusDays = DataConverter.GetInt(rowData.GetString("inv-age-456-plus-days"));
             row.Currency = rowData.GetString("currency");
-            row.QtyToBeChargedLtsf12Mo = DataConverter.GetInt(rowData.GetString("qty-to-be-charged-ltsf-12-mo"));
-            row.QtyToBeChargedLtsf11Mo = DataConverter.GetInt(rowData.GetString("qty-to-be-charged-ltsf-11-mo"));
-            row.ProjectedLtsf11Mo = DataConverter.GetInt(rowData.GetString("projected-ltsf-11-mo"));
-            row.EstimatedLtsfNextCharge = DataConverter.GetInt(rowData.GetString("estimated-ltsf-next-charge"));
+            row.QtyToBeChargedAis241To270Days = DataConverter.GetInt(rowData.GetString("quantity-to-be-charged-ais-241-270-days"));
+            row.EstimatedAis241To270Days = DataConverter.GetDecimal(rowData.GetString("estimated-ais-241-270-days"));
+            row.QtyToBeChargedAis271To300Days = DataConverter.GetInt(rowData.GetString("quantity-to-be-charged-ais-271-300-days"));
+            row.EstimatedAis271To300Days = DataConverter.GetDecimal(rowData.GetString("estimated-ais-271-300-days"));
+            row.QtyToBeChargedAis301To330Days = DataConverter.GetInt(rowData.GetString("quantity-to-be-charged-ais-301-330-days"));
+            row.EstimatedAis301To330Days = DataConverter.GetDecimal(rowData.GetString("estimated-ais-301-330-days"));
+            row.QtyToBeChargedAis331To365Days = DataConverter.GetInt(rowData.GetString("quantity-to-be-charged-ais-331-365-days"));
+            row.EstimatedAis331To365Days = DataConverter.GetDecimal(rowData.GetString("estimated-ais-331-365-days"));
+            row.QtyToBeChargedAis366To455Days = DataConverter.GetInt(rowData.GetString("quantity-to-be-charged-ais-366-455-days"));
+            row.EstimatedAis366To455Days = DataConverter.GetDecimal(rowData.GetString("estimated-ais-366-455-days"));
+            row.QtyToBeChargedAis456PlusDays = DataConverter.GetInt(rowData.GetString("quantity-to-be-charged-ais-456-plus-days"));
+            row.EstimatedAis456PlusDays = DataConverter.GetDecimal(rowData.GetString("estimated-ais-456-plus-days"));
             row.UnitsShippedT7 = DataConverter.GetInt(rowData.GetString("units-shipped-t7"));
             row.UnitsShippedT30 = DataConverter.GetInt(rowData.GetString("units-shipped-t30"));
             row.UnitsShippedT60 = DataConverter.GetInt(rowData.GetString("units-shipped-t60"));
@@ -137,7 +173,7 @@ namespace FikaAmazonAPI.ReportGeneration
             row.VolumeUnitMeasurement = rowData.GetString("volume-unit-measurement");
             row.StorageType = rowData.GetString("storage-type");
             row.StorageVolume = DataConverter.GetDouble(rowData.GetString("storage-volume"));
-            row.StorageType = rowData.GetString("marketplace");
+            row.Marketplace = rowData.GetString("marketplace");
             row.ProductGroup = rowData.GetString("product-group");
             row.SalesRank = DataConverter.GetInt(rowData.GetString("sales-rank"));
             row.DaysOfSupply = DataConverter.GetInt(rowData.GetString("days-of-supply"));
@@ -159,9 +195,24 @@ namespace FikaAmazonAPI.ReportGeneration
             row.InboundWorking = DataConverter.GetInt(rowData.GetString("inbound-working"));
             row.InboundShipped = DataConverter.GetInt(rowData.GetString("inbound-shipped"));
             row.InboundReceived = DataConverter.GetInt(rowData.GetString("inbound-received"));
-            row.NoSaleLast6Months = rowData.GetString("no-sale-last-6-months");
-            row.ReservedQuantity = DataConverter.GetInt(rowData.GetString("reserved-quantity"));
+            row.ReservedQuantity = DataConverter.GetInt(rowData.GetString("Total Reserved Quantity"));
+            row.ReservedFcProcessing = DataConverter.GetInt(rowData.GetString("Reserved FC Processing"));
+            row.ReservedCustomerOrder = DataConverter.GetInt(rowData.GetString("Reserved Customer Order"));
+            row.ReservedStaging = DataConverter.GetInt(rowData.GetString("Reserved Staging"));
+            row.InventorySupplyAtFba = DataConverter.GetInt(rowData.GetString("Inventory Supply at FBA"));
             row.UnfulfillableQuantity = DataConverter.GetInt(rowData.GetString("unfulfillable-quantity"));
+            row.RecommendedShipInQuantity = DataConverter.GetInt(rowData.GetString("Recommended ship-in quantity"));
+            row.RecommendedShipInDate = DataConverter.GetDate(rowData.GetString("Recommended ship-in date"), DataConverter.DateTimeFormat.DATE_AGING_FORMAT);
+            row.HistoricalDaysOfSupply = DataConverter.GetDecimal(rowData.GetString("historical-days-of-supply"));
+            row.ShortTermHistoricalDaysOfSupply = DataConverter.GetDecimal(rowData.GetString("Short term historical days of supply"));
+            row.LongTermHistoricalDaysOfSupply = DataConverter.GetDecimal(rowData.GetString("Long term historical days of supply"));
+            row.HistoricalDaysOfSupplyLastUpdatedDate = DataConverter.GetDate(rowData.GetString("Last updated date for Historical Days of Supply"), DataConverter.DateTimeFormat.DATE_AGING_FORMAT);
+            row.InventoryAgeSnapshotDate = DataConverter.GetDate(rowData.GetString("Inventory age snapshot date"), DataConverter.DateTimeFormat.DATE_AGING_FORMAT);
+            row.TotalDaysOfSupplyIncludingOpenShipments = DataConverter.GetInt(rowData.GetString("Total Days of Supply (including units from open shipments)"));
+            row.IsSeasonalInNext3Months = rowData.GetString("is-seasonal-in-next-3-months");
+            row.SeasonName = rowData.GetString("season-name");
+            row.SeasonStartDate = DataConverter.GetDate(rowData.GetString("season-start-date"), DataConverter.DateTimeFormat.DATE_AGING_FORMAT);
+            row.SeasonEndDate = DataConverter.GetDate(rowData.GetString("season-end-date"), DataConverter.DateTimeFormat.DATE_AGING_FORMAT);
             row.refNumber = refNumber;
             return row;
         }
