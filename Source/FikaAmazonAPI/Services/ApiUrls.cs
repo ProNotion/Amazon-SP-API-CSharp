@@ -440,7 +440,73 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Services
                 return $"{_resourceBaseUrl}/warehouses/{warehouseId}/items";
             }
         }
-        
+
+        protected class VendorDirectFulfillmentPaymentsApiUrls
+        {
+            private static readonly string _resourceBaseUrl = "/vendor/directFulfillment/payments/v1";
+
+            public static string SubmitInvoice => $"{_resourceBaseUrl}/invoices";
+        }
+
+        protected class VendorDirectFulfillmentTransactionsApiUrls
+        {
+            private static readonly string _resourceBaseUrl = "/vendor/directFulfillment/transactions/v1";
+
+            public static string GetTransactionStatus(string transactionId) => $"{_resourceBaseUrl}/transactions/{transactionId}";
+        }
+
+        protected class VendorDirectFulfillmentShippingApiUrls
+        {
+            private static readonly string _resourceBaseUrl = "/vendor/directFulfillment/shipping/v1";
+
+            public static string ShippingLabels => $"{_resourceBaseUrl}/shippingLabels";
+            public static string ShippingLabel(string purchaseOrderNumber) => $"{_resourceBaseUrl}/shippingLabels/{purchaseOrderNumber}";
+            public static string ShipmentConfirmations => $"{_resourceBaseUrl}/shipmentConfirmations";
+            public static string ShipmentStatusUpdates => $"{_resourceBaseUrl}/shipmentStatusUpdates";
+            public static string CustomerInvoices => $"{_resourceBaseUrl}/customerInvoices";
+            public static string CustomerInvoice(string purchaseOrderNumber) => $"{_resourceBaseUrl}/customerInvoices/{purchaseOrderNumber}";
+            public static string PackingSlips => $"{_resourceBaseUrl}/packingSlips";
+            public static string PackingSlip(string purchaseOrderNumber) => $"{_resourceBaseUrl}/packingSlips/{purchaseOrderNumber}";
+        }
+
+        protected class VendorShipmentsApiUrls
+        {
+            private static readonly string _resourceBaseUrl = "/vendor/shipping/v1";
+
+            public static string ShipmentConfirmations => $"{_resourceBaseUrl}/shipmentConfirmations";
+            public static string Shipments => $"{_resourceBaseUrl}/shipments";
+            public static string TransportLabels => $"{_resourceBaseUrl}/transportLabels";
+        }
+
+        protected class VendorInvoicesApiUrls
+        {
+            private static readonly string _resourceBaseUrl = "/vendor/payments/v1";
+
+            public static string SubmitInvoices => $"{_resourceBaseUrl}/invoices";
+        }
+
+        protected class DataKioskApiUrls
+        {
+            private static readonly string _resourceBaseUrl = "/dataKiosk/2023-11-15";
+
+            public static string Queries => $"{_resourceBaseUrl}/queries";
+            public static string Query(string queryId) => $"{_resourceBaseUrl}/queries/{queryId}";
+            public static string Document(string documentId) => $"{_resourceBaseUrl}/documents/{documentId}";
+        }
+
+        protected class ExternalFulfillmentShipmentApiUrls
+        {
+            private static readonly string _resourceBaseUrl = "/externalFulfillment/2024-09-11";
+
+            public static string Shipments => $"{_resourceBaseUrl}/shipments";
+            public static string Shipment(string shipmentId) => $"{_resourceBaseUrl}/shipments/{shipmentId}";
+            public static string Packages(string shipmentId) => $"{Shipment(shipmentId)}/packages";
+            public static string Package(string shipmentId, string packageId) => $"{Packages(shipmentId)}/{packageId}";
+            public static string ShippingOptions(string shipmentId) => $"{Shipment(shipmentId)}/shippingOptions";
+            public static string Invoice(string shipmentId) => $"{Shipment(shipmentId)}/invoice";
+            public static string ShipLabels(string shipmentId) => $"{Shipment(shipmentId)}/shipLabels";
+        }
+
         protected class VendorDirectFulfillmentOrdersApiUrls
         {
             private readonly static string _resourceBaseUrl = "/vendor/directFulfillment/orders/v1";

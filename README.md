@@ -24,53 +24,61 @@ Install-Package CSharpAmazonSpAPI
 ```
 
 ---
-### Tasks
+### Supported APIs
+
 #### Seller
 
-- [x] [OrdersV0](https://developer-docs.amazon.com/sp-api/docs/orders-api-v0-reference)
-- [x] [Reports](https://developer-docs.amazon.com/sp-api/docs/reports-api-v2021-06-30-reference)
-- [x] [FinancesV0](https://developer-docs.amazon.com/sp-api/docs/finances-api-reference)
-- [x] [Feeds](https://developer-docs.amazon.com/sp-api/docs/feeds-api-v2021-06-30-reference) [Use Case Guide](https://developer-docs.amazon.com/sp-api/docs/feeds-api-v2021-06-30-use-case-guide) [feedType](https://developer-docs.amazon.com/sp-api/docs/feed-type-values)
-- [x] [ListingsItems](https://developer-docs.amazon.com/sp-api/docs/listings-items-api-v2021-08-01-reference)  [Use Case Guide](https://developer-docs.amazon.com/sp-api/docs/listings-items-api-v2021-08-01-use-case-guide)
-- [x] [Restrictions](https://developer-docs.amazon.com/sp-api/docs/listings-restrictions-api-v2021-08-01-reference)  [Use Case Guide](https://developer-docs.amazon.com/sp-api/docs/listings-restrictions-api-v2021-08-01-use-case-guide)
-- [x] [ProductTypes](https://developer-docs.amazon.com/sp-api/docs/product-type-definitions-api-v2020-09-01-reference)  [Use Case Guide](https://developer-docs.amazon.com/sp-api/docs/product-type-api-use-case-guide)
-- [x] [Uploads](https://developer-docs.amazon.com/sp-api/docs/uploads-api-reference)  [Use Case Guide](https://developer-docs.amazon.com/sp-api/docs/uploads-api-use-case-guide)
-- [x] [shipmentInvoicingV0](https://developer-docs.amazon.com/sp-api/docs/shipment-invoicing-api-v0-reference)
-- [x] [Shippings](https://developer-docs.amazon.com/sp-api/docs/shipping-api-v1-reference)
-- [x] [CatalogItemsV0](https://developer-docs.amazon.com/sp-api/docs/catalog-items-api-v0-reference)
-- [x] [CatalogItemsV20220401](https://developer-docs.amazon.com/sp-api/docs/catalog-items-api-v2022-04-01-reference)
-- [x] [FBAInventory](https://developer-docs.amazon.com/sp-api/docs/fbainventory-api-v1-reference)
-- [x] [FBASmallAndLight](https://developer-docs.amazon.com/sp-api/docs/fbasmallandlight-api-v1-reference)
-- [x] [FBAInboundEligibility](https://developer-docs.amazon.com/sp-api/docs/fbainboundeligibility-api-v1-reference)
-- [x] [FulFillmentInbound](https://developer-docs.amazon.com/sp-api/docs/fulfillment-inbound-api-v0-reference)
-- [x] [FulFillmentOutbound](https://developer-docs.amazon.com/sp-api/docs/fulfillment-outbound-api-v2020-07-01-reference)
-- [x] [MerchantFulFillment](https://developer-docs.amazon.com/sp-api/docs/merchant-fulfillment-api-v0-reference)
-- [x] [Messaging](https://developer-docs.amazon.com/sp-api/docs/messaging-api-v1-reference)
-- [x] [Notifications](https://developer-docs.amazon.com/sp-api/docs/notifications-api-v1-reference)  [Use Case Guide](https://developer-docs.amazon.com/sp-api/docs/notifications-api-v1-use-case-guide)
-- [x] [ProductFeesV0](https://developer-docs.amazon.com/sp-api/docs/product-fees-api-v0-reference)
-- [x] [ProductPricingV0](https://developer-docs.amazon.com/sp-api/docs/product-pricing-api-v0-reference)
-- [x] [Sales](https://developer-docs.amazon.com/sp-api/docs/sales-api-v1-reference)
-- [x] [Sellers](https://developer-docs.amazon.com/sp-api/docs/sellers-api-v1-reference)
-- [x] [Services](https://developer-docs.amazon.com/sp-api/docs/services-api-v1-reference) — `getServiceJobByServiceJobId`, `getServiceJobs`, `cancelServiceJobByServiceJobId`, `completeServiceJobByServiceJobId`
-- [x] [Solicitations](https://developer-docs.amazon.com/sp-api/docs/solicitations-api-v1-reference)
-- [x] [Token](https://developer-docs.amazon.com/sp-api/docs/tokens-api-v2021-03-01-reference)  [Use Case Guide](https://developer-docs.amazon.com/sp-api/docs/tokens-api-use-case-guide)
-- [x] [Authorization](https://developer-docs.amazon.com/sp-api/docs/authorization-api-v1-reference)
-- [x] [Easy Ship](https://developer-docs.amazon.com/sp-api/docs/easy-ship-api-v2022-03-23-reference)
-- [x] [A+ Content](https://developer-docs.amazon.com/sp-api/docs/selling-partner-api-for-a-content-management)
-- [x] [Replenishment](https://developer-docs.amazon.com/sp-api/docs/replenishment-api-v2022-11-07-reference) — `listOffers`, `listOfferMetrics`, `getSellingPartnerMetrics`
+| API | Status | Notes / Use Case Guide |
+| --- | :---: | --- |
+| [OrdersV0](https://developer-docs.amazon.com/sp-api/docs/orders-api-v0-reference) | ✅ | |
+| [Reports](https://developer-docs.amazon.com/sp-api/docs/reports-api-v2021-06-30-reference) | ✅ | |
+| [FinancesV0](https://developer-docs.amazon.com/sp-api/docs/finances-api-reference) | ✅ | |
+| [Feeds](https://developer-docs.amazon.com/sp-api/docs/feeds-api-v2021-06-30-reference) | ✅ | [Use Case Guide](https://developer-docs.amazon.com/sp-api/docs/feeds-api-v2021-06-30-use-case-guide) · [feedType](https://developer-docs.amazon.com/sp-api/docs/feed-type-values) |
+| [ListingsItems](https://developer-docs.amazon.com/sp-api/docs/listings-items-api-v2021-08-01-reference) | ✅ | [Use Case Guide](https://developer-docs.amazon.com/sp-api/docs/listings-items-api-v2021-08-01-use-case-guide) |
+| [Restrictions](https://developer-docs.amazon.com/sp-api/docs/listings-restrictions-api-v2021-08-01-reference) | ✅ | [Use Case Guide](https://developer-docs.amazon.com/sp-api/docs/listings-restrictions-api-v2021-08-01-use-case-guide) |
+| [ProductTypes](https://developer-docs.amazon.com/sp-api/docs/product-type-definitions-api-v2020-09-01-reference) | ✅ | [Use Case Guide](https://developer-docs.amazon.com/sp-api/docs/product-type-api-use-case-guide) |
+| [Uploads](https://developer-docs.amazon.com/sp-api/docs/uploads-api-reference) | ✅ | [Use Case Guide](https://developer-docs.amazon.com/sp-api/docs/uploads-api-use-case-guide) |
+| [shipmentInvoicingV0](https://developer-docs.amazon.com/sp-api/docs/shipment-invoicing-api-v0-reference) | ✅ | |
+| [Shippings](https://developer-docs.amazon.com/sp-api/docs/shipping-api-v1-reference) | ✅ | |
+| [CatalogItemsV0](https://developer-docs.amazon.com/sp-api/docs/catalog-items-api-v0-reference) | ✅ | |
+| [CatalogItemsV20220401](https://developer-docs.amazon.com/sp-api/docs/catalog-items-api-v2022-04-01-reference) | ✅ | |
+| [FBAInventory](https://developer-docs.amazon.com/sp-api/docs/fbainventory-api-v1-reference) | ✅ | |
+| [FBASmallAndLight](https://developer-docs.amazon.com/sp-api/docs/fbasmallandlight-api-v1-reference) | ✅ | |
+| [FBAInboundEligibility](https://developer-docs.amazon.com/sp-api/docs/fbainboundeligibility-api-v1-reference) | ✅ | |
+| [FulFillmentInbound](https://developer-docs.amazon.com/sp-api/docs/fulfillment-inbound-api-v0-reference) | ✅ | |
+| [FulFillmentOutbound](https://developer-docs.amazon.com/sp-api/docs/fulfillment-outbound-api-v2020-07-01-reference) | ✅ | |
+| [MerchantFulFillment](https://developer-docs.amazon.com/sp-api/docs/merchant-fulfillment-api-v0-reference) | ✅ | |
+| [Messaging](https://developer-docs.amazon.com/sp-api/docs/messaging-api-v1-reference) | ✅ | |
+| [Notifications](https://developer-docs.amazon.com/sp-api/docs/notifications-api-v1-reference) | ✅ | [Use Case Guide](https://developer-docs.amazon.com/sp-api/docs/notifications-api-v1-use-case-guide) |
+| [ProductFeesV0](https://developer-docs.amazon.com/sp-api/docs/product-fees-api-v0-reference) | ✅ | |
+| [ProductPricingV0](https://developer-docs.amazon.com/sp-api/docs/product-pricing-api-v0-reference) | ✅ | |
+| [Sales](https://developer-docs.amazon.com/sp-api/docs/sales-api-v1-reference) | ✅ | |
+| [Sellers](https://developer-docs.amazon.com/sp-api/docs/sellers-api-v1-reference) | ✅ | |
+| [Services](https://developer-docs.amazon.com/sp-api/docs/services-api-v1-reference) | ✅ | `getServiceJobByServiceJobId`, `getServiceJobs`, `cancelServiceJobByServiceJobId`, `completeServiceJobByServiceJobId` |
+| [Solicitations](https://developer-docs.amazon.com/sp-api/docs/solicitations-api-v1-reference) | ✅ | |
+| [Token](https://developer-docs.amazon.com/sp-api/docs/tokens-api-v2021-03-01-reference) | ✅ | [Use Case Guide](https://developer-docs.amazon.com/sp-api/docs/tokens-api-use-case-guide) |
+| [Authorization](https://developer-docs.amazon.com/sp-api/docs/authorization-api-v1-reference) | ✅ | |
+| [Easy Ship](https://developer-docs.amazon.com/sp-api/docs/easy-ship-api-v2022-03-23-reference) | ✅ | |
+| [A+ Content](https://developer-docs.amazon.com/sp-api/docs/selling-partner-api-for-a-content-management) | ✅ | |
+| [Replenishment](https://developer-docs.amazon.com/sp-api/docs/replenishment-api-v2022-11-07-reference) | ✅ | `listOffers`, `listOfferMetrics`, `getSellingPartnerMetrics` |
+| [External Fulfillment Shipments](https://developer-docs.amazon.com/sp-api/reference/externalfulfillmentshipments-api-v2024-09-11) | ✅ | `getShipments`, `getShipment`, `processShipment`, `createPackages`, `updatePackage`, `retrieveShippingOptions`, `generateShipLabels`, `generateInvoice`, `retrieveInvoice`, `updatePackageStatus` |
+| [Data Kiosk (v2023-11-15)](https://developer-docs.amazon.com/sp-api/reference/datakiosk-api-v2023-11-15-reference) | ✅ | `getQueries`, `createQuery`, `getQuery`, `cancelQuery`, `getDocument` |
 
+#### Vendor
 
-#### Vendor 
+| API | Status | Notes |
+| --- | :---: | --- |
+| [VendorDirectFulfillmentInventoryV1](https://developer-docs.amazon.com/sp-api/docs/vendor-direct-fulfillment-inventory-api-v1-reference) | ✅ | |
+| [VendorDirectFulfillmentOrdersV1](https://developer-docs.amazon.com/sp-api/docs/vendor-direct-fulfillment-orders-api-v1-reference) | ✅ | |
+| [VendorDirectFulfillmentPaymentsV1](https://developer-docs.amazon.com/sp-api/docs/vendor-direct-fulfillment-payments-api-v1-reference) | ✅ | `submitInvoice` |
+| [VendorDirectFulfillmentShippingV1](https://developer-docs.amazon.com/sp-api/docs/vendor-direct-fulfillment-shipping-api-v1-reference) | ✅ | `getShippingLabels`, `submitShippingLabelRequest`, `getShippingLabel`, `submitShipmentConfirmations`, `submitShipmentStatusUpdates`, `getCustomerInvoices`, `getCustomerInvoice`, `getPackingSlips`, `getPackingSlip` |
+| [VendorDirectFulfillmentTransactionsV1](https://developer-docs.amazon.com/sp-api/docs/vendor-direct-fulfillment-transactions-api-v1-reference) | ✅ | `getTransactionStatus` |
+| [VendorOrders](https://developer-docs.amazon.com/sp-api/docs/vendor-orders-api-v1-reference) | ✅ | |
+| [vendorInvoices](https://developer-docs.amazon.com/sp-api/docs/vendor-invoices-api-v1-reference) | ✅ | `submitInvoices` |
+| [VendorShipments](https://developer-docs.amazon.com/sp-api/docs/vendor-shipments-api-v1-reference) | ✅ | `submitShipmentConfirmations`, `submitShipments`, `getShipmentDetails`, `getShipmentLabels` |
+| [VendorTransactionStatus](https://developer-docs.amazon.com/sp-api/docs/vendor-transaction-status-api-v1-reference) | ✅ | |
 
-- [ ] [VendorDirectFulfillmentInventoryV1](https://developer-docs.amazon.com/sp-api/docs/vendor-direct-fulfillment-inventory-api-v1-reference)
-- [x] [VendorDirectFulfillmentOrdersV1](https://developer-docs.amazon.com/sp-api/docs/vendor-direct-fulfillment-orders-api-v1-reference)
-- [ ] [VendorDirectFulfillmentPaymentsV1](https://developer-docs.amazon.com/sp-api/docs/vendor-direct-fulfillment-payments-api-v1-reference)
-- [ ] [VendorDirectFulfillmentShippingV1](https://developer-docs.amazon.com/sp-api/docs/vendor-direct-fulfillment-shipping-api-v1-reference)
-- [ ] [VendorDirectFulfillmentTransactionsV1](https://developer-docs.amazon.com/sp-api/docs/vendor-direct-fulfillment-transactions-api-v1-reference)
-- [x] [VendorOrders](https://developer-docs.amazon.com/sp-api/docs/vendor-orders-api-v1-reference)
-- [ ] [vendorInvoices](https://developer-docs.amazon.com/sp-api/docs/vendor-invoices-api-v1-reference)
-- [ ] [VendorShipments](https://developer-docs.amazon.com/sp-api/docs/vendor-shipments-api-v1-reference)
-- [ ] [VendorTransactionStatus](https://developer-docs.amazon.com/sp-api/docs/vendor-transaction-status-api-v1-reference)
+> **Legend:** ✅ Supported · ⬜ Not yet implemented
 
 
 
@@ -1217,6 +1225,189 @@ var upcoming = amazonConnection.Services.GetServiceJobs(new ParameterGetServiceJ
 // Returns true when the request succeeds with no errors in the response body.
 amazonConnection.Services.CancelServiceJobByServiceJobId("SJ-1234567890", "BUYER_REQUESTED_CANCELLATION");
 amazonConnection.Services.CompleteServiceJobByServiceJobId("SJ-1234567890");
+```
+
+### External Fulfillment Shipments (v2024-09-11)
+For more samples, please check [Here](https://github.com/abuzuhri/Amazon-SP-API-CSharp/blob/main/Source/FikaAmazonAPI.SampleCode/ExternalFulfillmentShipmentSample.cs).
+```CSharp
+// 1. List shipments — auto-pages through every result page and returns a flat list.
+//    Status is required. Set MaxNumberOfPages to stop after a given number of pages.
+var shipments = amazonConnection.ExternalFulfillmentShipment.GetShipments(new ParameterGetShipments
+{
+    Status           = Shipment.StatusEnum.CONFIRMED,
+    LocationId       = "LOCATION_ID",
+    MaxResults       = 50,
+    LastUpdatedAfter = DateTime.UtcNow.AddDays(-7),
+});
+
+// 2. Retrieve a single shipment.
+var shipment = amazonConnection.ExternalFulfillmentShipment.GetShipment("SHIPMENT_ID");
+
+// 3. Confirm (or REJECT) a shipment.
+amazonConnection.ExternalFulfillmentShipment.ProcessShipment("SHIPMENT_ID", ProcessShipmentOperation.CONFIRM,
+    new ShipmentAcknowledgementRequest
+    {
+        ReferenceId = "REFERENCE_ID",
+        LineItems = new List<LineItemWithReason>
+        {
+            new()
+            {
+                LineItem = new LineItem { Id = "LINE_ITEM_ID", Quantity = 1 },
+                Reason   = LineItemWithReason.ReasonEnum.CUSTOMERREQUESTED,
+            },
+        },
+    });
+
+// 4. Create packages for the shipment.
+amazonConnection.ExternalFulfillmentShipment.CreatePackages("SHIPMENT_ID", new Packages
+{
+    _Packages = new List<Package>
+    {
+        new()
+        {
+            Id     = "PACKAGE_ID",
+            Weight = new Weight { Value = "200.0", WeightUnit = Weight.WeightUnitEnum.G },
+            Status = Package.StatusEnum.CREATED,
+        },
+    },
+});
+
+// 5. Retrieve shipping options, then generate (or REGENERATE) ship labels.
+var options = amazonConnection.ExternalFulfillmentShipment.RetrieveShippingOptions("SHIPMENT_ID", "PACKAGE_ID");
+var labels  = amazonConnection.ExternalFulfillmentShipment.GenerateShipLabels("SHIPMENT_ID",
+    GenerateShipLabelsOperation.GENERATE, new ShipLabelsInput { PackageIds = new List<string> { "PACKAGE_ID" } },
+    "SHIPPING_OPTION_ID");
+
+// 6. Generate and retrieve the invoice.
+amazonConnection.ExternalFulfillmentShipment.GenerateInvoice("SHIPMENT_ID");
+var invoice = amazonConnection.ExternalFulfillmentShipment.RetrieveInvoice("SHIPMENT_ID");
+
+// 7. Mark a package as shipped (the API only accepts the SHIPPED status here).
+amazonConnection.ExternalFulfillmentShipment.UpdatePackageStatusShipped("SHIPMENT_ID", "PACKAGE_ID",
+    new PackageDeliveryStatus { Status = PackageStatus.SHIPPED });
+```
+### Vendor Direct Fulfillment Payments (v1) — Submit invoice
+For more samples, please check [Here](https://github.com/abuzuhri/Amazon-SP-API-CSharp/blob/main/Source/FikaAmazonAPI.SampleCode/VendorDirectFulfillmentPaymentsSample.cs).
+```CSharp
+// Submit an invoice for a direct-fulfillment order. Returns a TransactionReference
+// whose TransactionId can be polled via amazonConnection.VendorTransactionStatus.
+var result = amazonConnection.VendorDirectFulfillmentPayments.SubmitInvoice(new SubmitInvoiceRequest
+{
+    Invoices = new List<InvoiceDetail>
+    {
+        new()
+        {
+            InvoiceNumber = "INV-0001",
+            InvoiceDate   = DateTime.UtcNow.ToString("o"),
+            RemitToParty  = new PartyIdentification { PartyId = "REMIT_TO_PARTY_ID" },
+            ShipFromParty = new PartyIdentification { PartyId = "SHIP_FROM_PARTY_ID" },
+            InvoiceTotal  = new Money { CurrencyCode = "USD", Amount = "100.00" },
+            Items = new List<InvoiceItem>
+            {
+                new()
+                {
+                    ItemSequenceNumber  = "1",
+                    InvoicedQuantity    = new ItemQuantity { Amount = 2, UnitOfMeasure = "Each" },
+                    NetCost             = new Money { CurrencyCode = "USD", Amount = "50.00" },
+                    PurchaseOrderNumber = "PO-123456",
+                },
+            },
+        },
+    },
+});
+```
+### Vendor Direct Fulfillment Transactions (v1) — Get transaction status
+For more samples, please check [Here](https://github.com/abuzuhri/Amazon-SP-API-CSharp/blob/main/Source/FikaAmazonAPI.SampleCode/VendorDirectFulfillmentTransactionsSample.cs).
+```CSharp
+// Poll the status of a transaction returned by a direct-fulfillment submit operation
+// (e.g. SubmitInvoice, SubmitInventoryUpdate).
+var status = amazonConnection.VendorDirectFulfillmentTransactions.GetTransactionStatus("TRANSACTION_ID");
+
+if (status?._TransactionStatus?.Status == Transaction.StatusEnum.Failure)
+{
+    var errors = status._TransactionStatus.Errors; // inspect why it failed
+}
+```
+### Vendor Invoices (v1) — Submit invoices
+For more samples, please check [Here](https://github.com/abuzuhri/Amazon-SP-API-CSharp/blob/main/Source/FikaAmazonAPI.SampleCode/VendorInvoicesSample.cs).
+```CSharp
+var result = amazonConnection.VendorInvoices.SubmitInvoices(new SubmitInvoicesRequest
+{
+    Invoices = new List<Invoice>
+    {
+        new()
+        {
+            Id              = "INV-0001",
+            ReferenceNumber = "PO-123456",
+            RemitToParty    = new PartyIdentification { PartyId = "REMIT_TO_PARTY_ID" },
+            ShipFromParty   = new PartyIdentification { PartyId = "SHIP_FROM_PARTY_ID" },
+            ShipToParty     = new PartyIdentification { PartyId = "SHIP_TO_PARTY_ID" },
+            InvoiceTotal    = new Money { CurrencyCode = "USD", Amount = "100.00" },
+        },
+    },
+});
+```
+
+### Vendor Shipments (v1) — Confirmations, details, labels
+For more samples, please check [Here](https://github.com/abuzuhri/Amazon-SP-API-CSharp/blob/main/Source/FikaAmazonAPI.SampleCode/VendorShipmentsSample.cs).
+```CSharp
+// Submit shipment confirmations
+var txn = amazonConnection.VendorShipments.SubmitShipmentConfirmations(new SubmitShipmentConfirmationsRequest
+{
+    ShipmentConfirmations = new List<ShipmentConfirmation> { new() { ShipmentIdentifier = "SHIPMENT_ID" } },
+});
+
+// Get shipment details (page manually via Pagination.NextToken)
+var details   = amazonConnection.VendorShipments.GetShipmentDetails(new ParameterGetShipmentDetails { Limit = 10, SortOrder = "DESC" });
+var shipments = details?.Shipments;
+
+// Get transport labels
+var labels = amazonConnection.VendorShipments.GetShipmentLabels(new ParameterGetShipmentLabels { Limit = 10 });
+```
+
+### Vendor Direct Fulfillment Shipping (v1) — Labels, confirmations, invoices, packing slips
+For more samples, please check [Here](https://github.com/abuzuhri/Amazon-SP-API-CSharp/blob/main/Source/FikaAmazonAPI.SampleCode/VendorDirectFulfillmentShippingSample.cs).
+```CSharp
+var shipping = amazonConnection.VendorDirectFulfillmentShipping;
+
+// Paged list operations share ParameterVendorDirectFulfillmentShippingList.
+var labelList = shipping.GetShippingLabels(new ParameterVendorDirectFulfillmentShippingList
+{
+    Limit = 10, SortOrder = "ASC", CreatedAfter = DateTime.UtcNow.AddDays(-7), CreatedBefore = DateTime.UtcNow,
+});
+
+var label   = shipping.GetShippingLabel("PURCHASE_ORDER_NUMBER");
+var invoice = shipping.GetCustomerInvoice("PURCHASE_ORDER_NUMBER");
+var slip    = shipping.GetPackingSlip("PURCHASE_ORDER_NUMBER");
+
+// Submit operations return a TransactionReference.
+shipping.SubmitShipmentConfirmations(new SubmitShipmentConfirmationsRequest
+{
+    ShipmentConfirmations = new List<ShipmentConfirmation> { new() { PurchaseOrderNumber = "PURCHASE_ORDER_NUMBER" } },
+});
+```
+### Data Kiosk (v2023-11-15) — GraphQL analytics queries
+For more samples, please check [Here](https://github.com/abuzuhri/Amazon-SP-API-CSharp/blob/main/Source/FikaAmazonAPI.SampleCode/DataKioskSample.cs).
+```CSharp
+// 1. Submit a GraphQL query (see Amazon's Data Kiosk schema for available datasets).
+var created = amazonConnection.DataKiosk.CreateQuery(new CreateQuerySpecification
+{
+    Query = @"query { analytics_salesAndTraffic_2024_04_24 { salesAndTrafficByDate(startDate: ""2024-01-01"" endDate: ""2024-01-07"" aggregateBy: DAY marketplaceIds: [""ATVPDKIKX0DER""]) { startDate sales { orderedProductSales { amount currencyCode } } } } }"
+});
+
+// 2. Poll the query until it finishes.
+var query = amazonConnection.DataKiosk.GetQuery(created.QueryId);
+
+// 3. When DONE, download the results document.
+if (query.ProcessingStatus == Query.ProcessingStatusEnum.DONE && !string.IsNullOrEmpty(query.DataDocumentId))
+{
+    var document = amazonConnection.DataKiosk.GetDocument(query.DataDocumentId);
+    var url = document.DocumentUrl; // gzip-compressed JSONL results
+}
+
+// List / cancel
+var list = amazonConnection.DataKiosk.GetQueries(new ParameterGetQueries { PageSize = 10 });
+amazonConnection.DataKiosk.CancelQuery(created.QueryId);
 ```
 ---
 ## Q & A

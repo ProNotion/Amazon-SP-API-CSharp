@@ -58,7 +58,14 @@ namespace FikaAmazonAPI
         public VendorDirectFulfillmentOrderService VendorDirectFulfillmentOrders => this._VendorDirectFulfillmentOrders ?? throw _NoCredentials;
         public VendorOrderService VendorOrders => this._VendorOrders ?? throw _NoCredentials;
         public VendorDirectFulfillmentInventoryService VendorDirectFulfillmentInventory => this._VendorDirectFulfillmentInventory ?? throw _NoCredentials;
-        public VendorTransactionStatusService VendorTransactionStatus => this._VendorTransactionStatus ?? throw _NoCredentials;        
+        public VendorDirectFulfillmentPaymentsService VendorDirectFulfillmentPayments => this._VendorDirectFulfillmentPayments ?? throw _NoCredentials;
+        public VendorDirectFulfillmentTransactionsService VendorDirectFulfillmentTransactions => this._VendorDirectFulfillmentTransactions ?? throw _NoCredentials;
+        public VendorDirectFulfillmentShippingService VendorDirectFulfillmentShipping => this._VendorDirectFulfillmentShipping ?? throw _NoCredentials;
+        public VendorShipmentsService VendorShipments => this._VendorShipments ?? throw _NoCredentials;
+        public VendorInvoicesService VendorInvoices => this._VendorInvoices ?? throw _NoCredentials;
+        public DataKioskService DataKiosk => this._DataKiosk ?? throw _NoCredentials;
+        public ExternalFulfillmentShipmentService ExternalFulfillmentShipment => this._ExternalFulfillmentShipment ?? throw _NoCredentials;
+        public VendorTransactionStatusService VendorTransactionStatus => this._VendorTransactionStatus ?? throw _NoCredentials;
         public MerchantShippingTemplateService MerchantShippingTemplate => this._MerchantShippingTemplate ?? throw _NoCredentials;
         public ReplenishmentService Replenishment => this._Replenishment ?? throw _NoCredentials;
         public ApplicationManagementService ApplicationManagement => this._ApplicationManagement ?? throw _NoCredentials;
@@ -103,6 +110,13 @@ namespace FikaAmazonAPI
         private VendorOrderService _VendorOrders { get; set; }
         private VendorTransactionStatusService _VendorTransactionStatus { get; set; }
         private VendorDirectFulfillmentInventoryService _VendorDirectFulfillmentInventory { get; set; }
+        private VendorDirectFulfillmentPaymentsService _VendorDirectFulfillmentPayments { get; set; }
+        private VendorDirectFulfillmentTransactionsService _VendorDirectFulfillmentTransactions { get; set; }
+        private VendorDirectFulfillmentShippingService _VendorDirectFulfillmentShipping { get; set; }
+        private VendorShipmentsService _VendorShipments { get; set; }
+        private VendorInvoicesService _VendorInvoices { get; set; }
+        private DataKioskService _DataKiosk { get; set; }
+        private ExternalFulfillmentShipmentService _ExternalFulfillmentShipment { get; set; }
         private MerchantShippingTemplateService _MerchantShippingTemplate { get; set; }
         private ReplenishmentService _Replenishment { get; set; }
         private ApplicationManagementService _ApplicationManagement { get; set; }
@@ -172,6 +186,13 @@ namespace FikaAmazonAPI
             this._VendorOrders = new VendorOrderService(this.Credentials, _loggerFactory);
             this._VendorTransactionStatus = new VendorTransactionStatusService(this.Credentials, _loggerFactory);
             this._VendorDirectFulfillmentInventory = new VendorDirectFulfillmentInventoryService(this.Credentials, _loggerFactory);
+            this._VendorDirectFulfillmentPayments = new VendorDirectFulfillmentPaymentsService(this.Credentials, _loggerFactory);
+            this._VendorDirectFulfillmentTransactions = new VendorDirectFulfillmentTransactionsService(this.Credentials, _loggerFactory);
+            this._VendorDirectFulfillmentShipping = new VendorDirectFulfillmentShippingService(this.Credentials, _loggerFactory);
+            this._VendorShipments = new VendorShipmentsService(this.Credentials, _loggerFactory);
+            this._VendorInvoices = new VendorInvoicesService(this.Credentials, _loggerFactory);
+            this._DataKiosk = new DataKioskService(this.Credentials, _loggerFactory);
+            this._ExternalFulfillmentShipment = new ExternalFulfillmentShipmentService(this.Credentials, _loggerFactory);
             this._MerchantShippingTemplate = new MerchantShippingTemplateService(this.Credentials, _loggerFactory);
             this._Replenishment = new ReplenishmentService(this.Credentials, _loggerFactory);
             this._ApplicationManagement = new ApplicationManagementService(this.Credentials, _loggerFactory);

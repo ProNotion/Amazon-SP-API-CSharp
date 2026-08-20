@@ -22,7 +22,13 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
         /// Enum value for type QUANTITY_PRICE
         /// </summary>
         [EnumMember(Value = "QUANTITY_PRICE")]
-        QUANTITY_PRICE = 2
+        QUANTITY_PRICE = 2,
+
+        /// <summary>
+        /// Enum value for type DISTRIBUTOR_PRICE
+        /// </summary>
+        [EnumMember(Value = "DISTRIBUTOR_PRICE")]
+        DISTRIBUTOR_PRICE = 3,
     }
 
 }
