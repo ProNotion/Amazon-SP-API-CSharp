@@ -69,7 +69,7 @@ namespace FikaAmazonAPI.Parameter.Order.V20260101
         /// <summary>
         /// Pagination occurs when a request produces a response that exceeds the maxResultsPerPage. This means that the response is divided into individual pages. To retrieve the next page, you must pass the nextToken value as the paginationToken query parameter in the next request. You will not receive a nextToken value on the last page.
         /// </summary>
-        public string PaginationToken { get; set; }
+        public string? PaginationToken { get; set; }
 
         /// <summary>
         /// Maximum number of pages to return

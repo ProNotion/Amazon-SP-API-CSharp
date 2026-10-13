@@ -498,6 +498,13 @@ var result = amazonConnection.Notification.CreateSubscription(
 
 > **Tip:** if your subscriptions include `APPLICATION_OAUTH_CLIENT_NEW_SECRET`, wrap your `IMessageReceiver` with [`RotationApplyingMessageReceiver`](#application-management-v2023-11-30--rotate-the-lwa-client-secret) so a rotated client secret is applied to `amazonConnection.Credentials.ClientSecret` automatically before your receiver sees the message.
 
+How the receive loop behaves:
+
+- **Long polling is on by default** (20 seconds). Leave `WaitTimeSeconds` unset unless you have a reason to change it; passing `0` forces short polling, which returns fewer messages per call and adds a 5 second pause between empty receives.
+- **Up to 10 messages are received per call**, handed to your receiver one by one, then deleted with a single batch call.
+- **Deletion** is controlled by `isDeleteNotificationAfterRead` (default `true` for `IMessageReceiver`). Implement `IMessageReceiverWithResult` instead and pass `false` if you want to decide per message - return `true` to delete, `false` to leave the message for redelivery after its visibility timeout.
+- **One loop per call.** To drain a queue that has built up a backlog, start several `StartReceivingNotificationMessagesAsync` tasks against the same queue - SQS hands each receive call a different set of messages.
+
 ```CSharp
 
 var SQS_URL = Environment.GetEnvironmentVariable("SQS_URL");
@@ -506,7 +513,7 @@ var param = new ParameterMessageReceiver(
     Environment.GetEnvironmentVariable("SecretKey"),
     SQS_URL,
     Amazon.RegionEndpoint.USEast2,
-    WaitTimeSeconds: 20); // Enable SQS long polling to reduce empty receives and cost
+    WaitTimeSeconds: 20); // Optional - long polling (20s) is the default; pass 0 for short polling
 
 var messageReceiver = new CustomMessageReceiver();
 

@@ -45,6 +45,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Sales
             {
                 this.CurrencyCode = CurrencyCode;
             }
+            this.Amount = Amount;
         }
 
         /// <summary>

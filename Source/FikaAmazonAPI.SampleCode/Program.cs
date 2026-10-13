@@ -20,11 +20,11 @@ namespace FikaAmazonAPI.SampleCode
 
             AmazonConnection amazonConnection = new AmazonConnection(new AmazonCredential()
             {
-                ClientId = config.GetSection("FikaAmazonAPI:ClientId").Value,
-                ClientSecret = config.GetSection("FikaAmazonAPI:ClientSecret").Value,
-                RefreshToken = config.GetSection("FikaAmazonAPI:RefreshToken").Value,
-                MarketPlaceID = config.GetSection("FikaAmazonAPI:MarketPlaceID").Value,
-                SellerID = config.GetSection("FikaAmazonAPI:SellerId").Value,
+                ClientId = config.Required("FikaAmazonAPI:ClientId"),
+                ClientSecret = config.Required("FikaAmazonAPI:ClientSecret"),
+                RefreshToken = config.Required("FikaAmazonAPI:RefreshToken"),
+                MarketPlaceID = config.Required("FikaAmazonAPI:MarketPlaceID"),
+                SellerID = config.Required("FikaAmazonAPI:SellerId"),
                 IsDebugMode = true,
             });
 

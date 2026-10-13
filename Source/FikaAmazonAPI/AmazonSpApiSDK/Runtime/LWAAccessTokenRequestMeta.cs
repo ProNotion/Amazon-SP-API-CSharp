@@ -30,5 +30,19 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Runtime
                 ClientSecret == other.ClientSecret &&
                 Scope == other.Scope;
         }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                int hash = 17;
+                hash = (hash * 31) + (GrantType == null ? 0 : GrantType.GetHashCode());
+                hash = (hash * 31) + (RefreshToken == null ? 0 : RefreshToken.GetHashCode());
+                hash = (hash * 31) + (ClientId == null ? 0 : ClientId.GetHashCode());
+                hash = (hash * 31) + (ClientSecret == null ? 0 : ClientSecret.GetHashCode());
+                hash = (hash * 31) + (Scope == null ? 0 : Scope.GetHashCode());
+                return hash;
+            }
+        }
     }
 }

@@ -21,10 +21,10 @@ namespace FikaAmazonAPI.Services
 
         // -- searchContentDocuments ---------------------------------------------------
 
-        public IList<ContentMetadataRecord> SearchContentDocuments(string marketplaceId = null) =>
+        public IList<ContentMetadataRecord> SearchContentDocuments(string? marketplaceId = null) =>
             Task.Run(() => SearchContentDocumentsAsync(marketplaceId)).ConfigureAwait(false).GetAwaiter().GetResult();
 
-        public async Task<IList<ContentMetadataRecord>> SearchContentDocumentsAsync(string marketplaceId = null, CancellationToken cancellationToken = default)
+        public async Task<IList<ContentMetadataRecord>> SearchContentDocumentsAsync(string? marketplaceId = null, CancellationToken cancellationToken = default)
         {
             var marketplace = string.IsNullOrEmpty(marketplaceId) ? AmazonCredential.MarketPlace.ID : marketplaceId;
             var records = new List<ContentMetadataRecord>();
@@ -50,10 +50,10 @@ namespace FikaAmazonAPI.Services
 
         // -- createContentDocument ----------------------------------------------------
 
-        public PostContentDocumentResponse CreateContentDocument(PostContentDocumentRequest request, string marketplaceId = null) =>
+        public PostContentDocumentResponse CreateContentDocument(PostContentDocumentRequest request, string? marketplaceId = null) =>
             Task.Run(() => CreateContentDocumentAsync(request, marketplaceId)).ConfigureAwait(false).GetAwaiter().GetResult();
 
-        public async Task<PostContentDocumentResponse> CreateContentDocumentAsync(PostContentDocumentRequest request, string marketplaceId = null, CancellationToken cancellationToken = default)
+        public async Task<PostContentDocumentResponse> CreateContentDocumentAsync(PostContentDocumentRequest request, string? marketplaceId = null, CancellationToken cancellationToken = default)
         {
             if (request?.ContentDocument == null)
                 throw new InvalidDataException("request.ContentDocument is required");
@@ -68,10 +68,10 @@ namespace FikaAmazonAPI.Services
 
         // -- getContentDocument -------------------------------------------------------
 
-        public GetContentDocumentResponse GetContentDocument(string contentReferenceKey, IList<AplusIncludedDataType> includedDataSet, string marketplaceId = null) =>
+        public GetContentDocumentResponse GetContentDocument(string contentReferenceKey, IList<AplusIncludedDataType> includedDataSet, string? marketplaceId = null) =>
             Task.Run(() => GetContentDocumentAsync(contentReferenceKey, includedDataSet, marketplaceId)).ConfigureAwait(false).GetAwaiter().GetResult();
 
-        public async Task<GetContentDocumentResponse> GetContentDocumentAsync(string contentReferenceKey, IList<AplusIncludedDataType> includedDataSet, string marketplaceId = null, CancellationToken cancellationToken = default)
+        public async Task<GetContentDocumentResponse> GetContentDocumentAsync(string contentReferenceKey, IList<AplusIncludedDataType> includedDataSet, string? marketplaceId = null, CancellationToken cancellationToken = default)
         {
             if (string.IsNullOrEmpty(contentReferenceKey))
                 throw new InvalidDataException("contentReferenceKey is required");
@@ -89,10 +89,10 @@ namespace FikaAmazonAPI.Services
 
         // -- updateContentDocument ----------------------------------------------------
 
-        public PostContentDocumentResponse UpdateContentDocument(string contentReferenceKey, PostContentDocumentRequest request, string marketplaceId = null) =>
+        public PostContentDocumentResponse UpdateContentDocument(string contentReferenceKey, PostContentDocumentRequest request, string? marketplaceId = null) =>
             Task.Run(() => UpdateContentDocumentAsync(contentReferenceKey, request, marketplaceId)).ConfigureAwait(false).GetAwaiter().GetResult();
 
-        public async Task<PostContentDocumentResponse> UpdateContentDocumentAsync(string contentReferenceKey, PostContentDocumentRequest request, string marketplaceId = null, CancellationToken cancellationToken = default)
+        public async Task<PostContentDocumentResponse> UpdateContentDocumentAsync(string contentReferenceKey, PostContentDocumentRequest request, string? marketplaceId = null, CancellationToken cancellationToken = default)
         {
             if (string.IsNullOrEmpty(contentReferenceKey))
                 throw new InvalidDataException("contentReferenceKey is required");
@@ -109,10 +109,10 @@ namespace FikaAmazonAPI.Services
 
         // -- listContentDocumentAsinRelations ----------------------------------------
 
-        public IList<AsinMetadata> ListContentDocumentAsinRelations(string contentReferenceKey, IList<AplusIncludedDataType> includedDataSet = null, IList<string> asins = null, string marketplaceId = null) =>
+        public IList<AsinMetadata> ListContentDocumentAsinRelations(string contentReferenceKey, IList<AplusIncludedDataType>? includedDataSet = null, IList<string>? asins = null, string? marketplaceId = null) =>
             Task.Run(() => ListContentDocumentAsinRelationsAsync(contentReferenceKey, includedDataSet, asins, marketplaceId)).ConfigureAwait(false).GetAwaiter().GetResult();
 
-        public async Task<IList<AsinMetadata>> ListContentDocumentAsinRelationsAsync(string contentReferenceKey, IList<AplusIncludedDataType> includedDataSet = null, IList<string> asins = null, string marketplaceId = null, CancellationToken cancellationToken = default)
+        public async Task<IList<AsinMetadata>> ListContentDocumentAsinRelationsAsync(string contentReferenceKey, IList<AplusIncludedDataType>? includedDataSet = null, IList<string>? asins = null, string? marketplaceId = null, CancellationToken cancellationToken = default)
         {
             if (string.IsNullOrEmpty(contentReferenceKey))
                 throw new InvalidDataException("contentReferenceKey is required");
@@ -145,10 +145,10 @@ namespace FikaAmazonAPI.Services
 
         // -- postContentDocumentAsinRelations -----------------------------------------
 
-        public PostContentDocumentAsinRelationsResponse PostContentDocumentAsinRelations(string contentReferenceKey, PostContentDocumentAsinRelationsRequest request, string marketplaceId = null) =>
+        public PostContentDocumentAsinRelationsResponse PostContentDocumentAsinRelations(string contentReferenceKey, PostContentDocumentAsinRelationsRequest request, string? marketplaceId = null) =>
             Task.Run(() => PostContentDocumentAsinRelationsAsync(contentReferenceKey, request, marketplaceId)).ConfigureAwait(false).GetAwaiter().GetResult();
 
-        public async Task<PostContentDocumentAsinRelationsResponse> PostContentDocumentAsinRelationsAsync(string contentReferenceKey, PostContentDocumentAsinRelationsRequest request, string marketplaceId = null, CancellationToken cancellationToken = default)
+        public async Task<PostContentDocumentAsinRelationsResponse> PostContentDocumentAsinRelationsAsync(string contentReferenceKey, PostContentDocumentAsinRelationsRequest request, string? marketplaceId = null, CancellationToken cancellationToken = default)
         {
             if (string.IsNullOrEmpty(contentReferenceKey))
                 throw new InvalidDataException("contentReferenceKey is required");
@@ -165,10 +165,10 @@ namespace FikaAmazonAPI.Services
 
         // -- validateContentDocumentAsinRelations -------------------------------------
 
-        public ValidateContentDocumentAsinRelationsResponse ValidateContentDocumentAsinRelations(PostContentDocumentRequest request, IList<string> asins = null, string marketplaceId = null) =>
+        public ValidateContentDocumentAsinRelationsResponse ValidateContentDocumentAsinRelations(PostContentDocumentRequest request, IList<string>? asins = null, string? marketplaceId = null) =>
             Task.Run(() => ValidateContentDocumentAsinRelationsAsync(request, asins, marketplaceId)).ConfigureAwait(false).GetAwaiter().GetResult();
 
-        public async Task<ValidateContentDocumentAsinRelationsResponse> ValidateContentDocumentAsinRelationsAsync(PostContentDocumentRequest request, IList<string> asins = null, string marketplaceId = null, CancellationToken cancellationToken = default)
+        public async Task<ValidateContentDocumentAsinRelationsResponse> ValidateContentDocumentAsinRelationsAsync(PostContentDocumentRequest request, IList<string>? asins = null, string? marketplaceId = null, CancellationToken cancellationToken = default)
         {
             if (request?.ContentDocument == null)
                 throw new InvalidDataException("request.ContentDocument is required");
@@ -186,10 +186,10 @@ namespace FikaAmazonAPI.Services
 
         // -- searchContentPublishRecords ----------------------------------------------
 
-        public IList<PublishRecord> SearchContentPublishRecords(string asin, string marketplaceId = null) =>
+        public IList<PublishRecord> SearchContentPublishRecords(string asin, string? marketplaceId = null) =>
             Task.Run(() => SearchContentPublishRecordsAsync(asin, marketplaceId)).ConfigureAwait(false).GetAwaiter().GetResult();
 
-        public async Task<IList<PublishRecord>> SearchContentPublishRecordsAsync(string asin, string marketplaceId = null, CancellationToken cancellationToken = default)
+        public async Task<IList<PublishRecord>> SearchContentPublishRecordsAsync(string asin, string? marketplaceId = null, CancellationToken cancellationToken = default)
         {
             if (string.IsNullOrEmpty(asin))
                 throw new InvalidDataException("asin is required");
@@ -219,10 +219,10 @@ namespace FikaAmazonAPI.Services
 
         // -- postContentDocumentApprovalSubmission ------------------------------------
 
-        public PostContentDocumentApprovalSubmissionResponse PostContentDocumentApprovalSubmission(string contentReferenceKey, string marketplaceId = null) =>
+        public PostContentDocumentApprovalSubmissionResponse PostContentDocumentApprovalSubmission(string contentReferenceKey, string? marketplaceId = null) =>
             Task.Run(() => PostContentDocumentApprovalSubmissionAsync(contentReferenceKey, marketplaceId)).ConfigureAwait(false).GetAwaiter().GetResult();
 
-        public async Task<PostContentDocumentApprovalSubmissionResponse> PostContentDocumentApprovalSubmissionAsync(string contentReferenceKey, string marketplaceId = null, CancellationToken cancellationToken = default)
+        public async Task<PostContentDocumentApprovalSubmissionResponse> PostContentDocumentApprovalSubmissionAsync(string contentReferenceKey, string? marketplaceId = null, CancellationToken cancellationToken = default)
         {
             if (string.IsNullOrEmpty(contentReferenceKey))
                 throw new InvalidDataException("contentReferenceKey is required");
@@ -237,10 +237,10 @@ namespace FikaAmazonAPI.Services
 
         // -- postContentDocumentSuspendSubmission -------------------------------------
 
-        public PostContentDocumentSuspendSubmissionResponse PostContentDocumentSuspendSubmission(string contentReferenceKey, string marketplaceId = null) =>
+        public PostContentDocumentSuspendSubmissionResponse PostContentDocumentSuspendSubmission(string contentReferenceKey, string? marketplaceId = null) =>
             Task.Run(() => PostContentDocumentSuspendSubmissionAsync(contentReferenceKey, marketplaceId)).ConfigureAwait(false).GetAwaiter().GetResult();
 
-        public async Task<PostContentDocumentSuspendSubmissionResponse> PostContentDocumentSuspendSubmissionAsync(string contentReferenceKey, string marketplaceId = null, CancellationToken cancellationToken = default)
+        public async Task<PostContentDocumentSuspendSubmissionResponse> PostContentDocumentSuspendSubmissionAsync(string contentReferenceKey, string? marketplaceId = null, CancellationToken cancellationToken = default)
         {
             if (string.IsNullOrEmpty(contentReferenceKey))
                 throw new InvalidDataException("contentReferenceKey is required");

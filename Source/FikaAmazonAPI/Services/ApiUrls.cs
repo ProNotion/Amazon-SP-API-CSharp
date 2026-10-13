@@ -596,6 +596,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Services
             }
             public static string ListFinancialEventsByGroupId(string eventGroupId) => $"{_resourceBaseUrl}/financialEventGroups/{eventGroupId}/financialEvents";
             public static string ListFinancialEventsByOrderId(string orderId) => $"{_resourceBaseUrl}/orders/{orderId}/financialEvents";
+            public static string ListFinancialEventsByShipmentId(string shipmentId) => $"{_resourceBaseUrl}/financialEvents/shipment/{shipmentId}";
             public static string ListFinancialEvents
             {
                 get => $"{_resourceBaseUrl}/financialEvents";
@@ -778,8 +779,6 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Services
 
         protected class AppIntegrationsApiUrls
         {
-            private readonly static string _resourceBaseUrl = "appIntegrations";
-
             #region V20240401
             private readonly static string _resourceBaseUrl_V20240401 = "appIntegrations/2024-04-01";
 

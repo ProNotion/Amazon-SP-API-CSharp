@@ -187,7 +187,7 @@ namespace FikaAmazonAPI.SampleCode
         }
 
 
-        public string CreateReportAndDawnload(ReportTypes reportTypes, DateTime? dataStartTime = null, DateTime? dataEndTime = null, ReportOptions reportOptions = null)
+        public string CreateReportAndDawnload(ReportTypes reportTypes, DateTime? dataStartTime = null, DateTime? dataEndTime = null, ReportOptions? reportOptions = null)
         {
             return amazonConnection.Reports.CreateReportAndDownloadFile(reportTypes, dataStartTime, dataEndTime, reportOptions);
         }

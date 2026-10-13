@@ -71,8 +71,8 @@ namespace FikaAmazonAPI.Services
         }
 
         protected async Task CreateAuthorizedRequestAsync(string url, RestSharp.Method method,
-            List<KeyValuePair<string, string>> queryParameters = null, object postJsonObj = null,
-            TokenDataType tokenDataType = TokenDataType.Normal, object parameter = null,
+            List<KeyValuePair<string, string>>? queryParameters = null, object? postJsonObj = null,
+            TokenDataType tokenDataType = TokenDataType.Normal, object? parameter = null,
             CancellationToken cancellationToken = default)
         {
             var PiiObject = parameter as IParameterBasedPII;
@@ -271,7 +271,7 @@ namespace FikaAmazonAPI.Services
                 {
                     return await ExecuteRequestTry<T>(rateLimitType, cancellationToken);
                 }
-                catch (AmazonQuotaExceededException ex)
+                catch (AmazonQuotaExceededException)
                 {
                     if (tryCount >= AmazonCredential.MaxThrottledRetryCount)
                     {
@@ -323,8 +323,10 @@ namespace FikaAmazonAPI.Services
                     }
                 }
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
+                // Rate-limit bookkeeping is best-effort: never fail the caller's request over it.
+                _logger?.LogDebug(ex, "Failed to apply rate limit for {RateLimitType}", rateLimitType);
             }
         }
 
@@ -406,7 +408,7 @@ namespace FikaAmazonAPI.Services
         }
 
         protected async Task RefreshToken(TokenDataType tokenDataType = TokenDataType.Normal,
-            CreateRestrictedDataTokenRequest requestPII = null)
+            CreateRestrictedDataTokenRequest? requestPII = null)
         {
             var token = AmazonCredential.GetToken(tokenDataType);
             if (token == null)
@@ -440,7 +442,7 @@ namespace FikaAmazonAPI.Services
         }
 
         protected async Task RefreshTokenAsync(TokenDataType tokenDataType = TokenDataType.Normal,
-            CreateRestrictedDataTokenRequest requestPII = null, CancellationToken cancellationToken = default)
+            CreateRestrictedDataTokenRequest? requestPII = null, CancellationToken cancellationToken = default)
         {
             var token = AmazonCredential.GetToken(tokenDataType);
             if (token == null)

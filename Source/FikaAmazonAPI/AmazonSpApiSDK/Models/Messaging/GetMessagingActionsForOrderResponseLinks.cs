@@ -1,6 +1,7 @@
 ﻿
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
@@ -48,7 +49,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Messaging
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as GetMessagingActionsForOrderResponse);
+            return this.Equals(input as GetMessagingActionsForOrderResponseLinks);
         }
 
 
@@ -83,7 +84,21 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Messaging
 
         public bool Equals(GetMessagingActionsForOrderResponseLinks input)
         {
-            return this.Equals(input);
+            if (input == null)
+                return false;
+
+            return 
+                (
+                    this.Self == input.Self ||
+                    this.Self != null &&
+                    this.Self.Equals(input.Self)
+                ) &&
+                (
+                    this.Actions == input.Actions ||
+                    this.Actions != null &&
+                    input.Actions != null &&
+                    this.Actions.SequenceEqual(input.Actions)
+                );
         }
     }
 }

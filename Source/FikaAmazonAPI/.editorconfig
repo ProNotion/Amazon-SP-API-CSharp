@@ -1,0 +1,24 @@
+# EditorConfig for the FikaAmazonAPI library.
+# https://editorconfig.org
+
+root = false
+
+# AmazonSpApiSDK/Models/** is swagger-generated from Amazon's OpenAPI specs
+# (https://github.com/amzn/selling-partner-api-models) and is overwritten whenever
+# the specs are regenerated. The generator emits required-property null guards and
+# generated Equals/GetHashCode bodies that test non-nullable value types (enums,
+# decimal, int) against null:
+#
+#     if (unit == null) throw new InvalidDataException("unit is a required property...");
+#
+# That produces ~400 CS0472 "expression is always true/false" warnings which are
+# harmless, cannot be fixed without hand-editing generated code, and would come
+# straight back on the next regeneration. Silence CS0472 for the generated models
+# only, so the warning stays live for hand-written code under Services/, Parameter/
+# and ReportGeneration/.
+# CS0109 comes from the same source: generated collection wrappers declare
+# "public new string ToJson()" on a class deriving from List<T>, which has no ToJson
+# to hide. Also generator noise, also regenerated on every refresh.
+[AmazonSpApiSDK/Models/**.cs]
+dotnet_diagnostic.CS0472.severity = none
+dotnet_diagnostic.CS0109.severity = none

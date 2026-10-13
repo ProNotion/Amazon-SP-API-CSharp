@@ -29,7 +29,18 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ShipmentInvoicing
 
         public override bool Equals(object input)
         {
-            return this.Equals(input as GetShipmentDetailsResponse);
+            return this.Equals(input as ShipmentDetail);
+        }
+
+        /// <summary>
+        /// Gets the hash code, kept consistent with Equals(ShipmentDetail).
+        /// </summary>
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                return this.WarehouseId == null ? 0 : this.WarehouseId.GetHashCode();
+            }
         }
         public bool Equals(ShipmentDetail input)
         {

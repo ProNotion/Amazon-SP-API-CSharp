@@ -92,7 +92,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Reports
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as GetReportsResponse);
+            return this.Equals(input as GetReportsResponseV00);
         }
 
         /// <summary>

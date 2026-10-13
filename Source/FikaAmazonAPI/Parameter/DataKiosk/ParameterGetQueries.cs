@@ -34,6 +34,6 @@ namespace FikaAmazonAPI.Parameter.DataKiosk
         /// <summary>
         /// A token to fetch a certain page of results when there are multiple pages.
         /// </summary>
-        public string PaginationToken { get; set; }
+        public string? PaginationToken { get; set; }
     }
 }

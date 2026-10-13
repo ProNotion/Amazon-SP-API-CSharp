@@ -9,7 +9,7 @@ namespace FikaAmazonAPI.ReportGeneration
 {
     internal static class ReportParser
     {
-        internal static List<T> ParseTableRows<T>(Stream stream, Func<TableRow, string, T> map, string refNumber, Encoding encoding = null)
+        internal static List<T> ParseTableRows<T>(Stream stream, Func<TableRow, string, T> map, string refNumber, Encoding? encoding = null)
         {
             if (stream == null || stream.Length == 0)
                 return new List<T>();
@@ -25,7 +25,7 @@ namespace FikaAmazonAPI.ReportGeneration
             return values;
         }
 
-        internal static List<T> ParseTableRows<T>(Stream stream, Func<TableRow, T> map, Encoding encoding = null)
+        internal static List<T> ParseTableRows<T>(Stream stream, Func<TableRow, T> map, Encoding? encoding = null)
         {
             if (stream == null || stream.Length == 0)
                 return new List<T>();
@@ -41,7 +41,7 @@ namespace FikaAmazonAPI.ReportGeneration
             return values;
         }
 
-        internal static List<T> ParseCsvLines<T>(Stream stream, Func<string, string, T> map, string refNumber, Encoding encoding = null)
+        internal static List<T> ParseCsvLines<T>(Stream stream, Func<string, string, T> map, string refNumber, Encoding? encoding = null)
         {
             if (stream == null || stream.Length == 0)
                 return new List<T>();
