@@ -35,7 +35,6 @@
         Financial_ListFinancialEventGroups,
         Financial_ListFinancialEventsByGroupId,
         Financial_ListFinancialEventsByOrderId,
-        Financial_ListFinancialEventsByShipmentId,
         Financial_ListFinancialEvents,
 
         FinancialV20240619_Transactions,
