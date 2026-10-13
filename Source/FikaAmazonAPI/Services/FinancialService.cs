@@ -99,49 +99,6 @@ namespace FikaAmazonAPI.Services
             return response.Payload.FinancialEvents;
         }
 
-        public List<FinancialEvents> ListFinancialEventsByShipmentId(string shipmentId) =>
-            Task.Run(() => GetFinancialEventsByShipmentIdAsync(shipmentId)).ConfigureAwait(false).GetAwaiter().GetResult();
-
-        /// <summary>
-        /// Returns all financial events for the specified FBA inbound shipment.
-        /// Wraps GET /finances/v0/financialEvents/shipment/{shipmentId} and follows
-        /// NextToken pagination until the response no longer carries a token.
-        /// </summary>
-        public async Task<List<FinancialEvents>> GetFinancialEventsByShipmentIdAsync(string shipmentId, CancellationToken cancellationToken = default)
-        {
-            await CreateAuthorizedRequestAsync(FinanceApiUrls.ListFinancialEventsByShipmentId(shipmentId), RestSharp.Method.Get, cancellationToken: cancellationToken);
-            var response = await ExecuteRequestAsync<ListFinancialEventsResponse>(RateLimitType.Financial_ListFinancialEventsByShipmentId, cancellationToken);
-
-            var list = new List<FinancialEvents>();
-            if (response?.Payload?.FinancialEvents != null)
-                list.Add(response.Payload.FinancialEvents);
-
-            var nextToken = response?.Payload?.NextToken;
-
-            while (!string.IsNullOrEmpty(nextToken))
-            {
-                var data = await ListFinancialEventsByShipmentIdByNextTokenAsync(shipmentId, nextToken, cancellationToken);
-                if (data?.Payload?.FinancialEvents != null)
-                {
-                    list.Add(data.Payload.FinancialEvents);
-                }
-                nextToken = data?.Payload?.NextToken;
-            }
-
-            return list;
-        }
-
-        private async Task<ListFinancialEventsResponse> ListFinancialEventsByShipmentIdByNextTokenAsync(string shipmentId, string nextToken, CancellationToken cancellationToken = default)
-        {
-            var queryParameters = new List<KeyValuePair<string, string>>
-            {
-                new KeyValuePair<string, string>("NextToken", nextToken)
-            };
-
-            await CreateAuthorizedRequestAsync(FinanceApiUrls.ListFinancialEventsByShipmentId(shipmentId), RestSharp.Method.Get, queryParameters, cancellationToken: cancellationToken);
-            return await ExecuteRequestAsync<ListFinancialEventsResponse>(RateLimitType.Financial_ListFinancialEventsByShipmentId, cancellationToken);
-        }
-
         public FinancialEvents ListFinancialEvents() =>
             Task.Run(() => ListFinancialEventsAsync()).ConfigureAwait(false).GetAwaiter().GetResult();
 
