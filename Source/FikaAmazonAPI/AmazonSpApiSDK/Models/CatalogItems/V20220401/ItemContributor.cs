@@ -21,7 +21,8 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.CatalogItems.V20220401
         /// <param name="itemContributorRole">The role of the contributor</param>
         public ItemContributor(string value = default(string), ItemContributorRole itemContributorRole = default)
         {
-            Role = new ItemContributorRole();
+            this.Value = value;
+            this.Role = itemContributorRole;
         }
 
 

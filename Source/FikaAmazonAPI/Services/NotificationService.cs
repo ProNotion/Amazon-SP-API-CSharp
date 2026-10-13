@@ -126,6 +126,16 @@ namespace FikaAmazonAPI.Services
             return StartReceivingNotificationMessagesAsync(param, new MessageReceiverAdapter(messageReceiver), isDeleteNotificationAfterRead, cancellationToken);
         }
 
+        /// <summary>
+        /// Wait time used when the caller does not set ParameterMessageReceiver.WaitTimeSeconds.
+        /// Long polling returns as soon as a message arrives and lets a single receive call fill
+        /// up to MaxNumberOfMessages; short polling only samples a subset of the SQS servers and
+        /// often returns one or two messages even when the queue holds thousands.
+        /// </summary>
+        private const int DefaultWaitTimeSeconds = 20;
+
+        private const int MaxNumberOfMessagesPerReceive = 10;
+
         public static async Task StartReceivingNotificationMessagesAsync(ParameterMessageReceiver param, IMessageReceiverWithResult messageReceiver, bool isDeleteNotificationAfterRead = false, CancellationToken cancellationToken = default)
         {
             var awsAccessKeyId = param.awsAccessKeyId;
@@ -135,27 +145,38 @@ namespace FikaAmazonAPI.Services
 
             using (var amazonSQSClient = new AmazonSQSClient(awsAccessKeyId, awsSecretAccessKey, Region))
             {
-                ReceiveMessageRequest receiveMessageRequest = new ReceiveMessageRequest(SQS_URL);
-                receiveMessageRequest.MaxNumberOfMessages = 10;
-                if (param.WaitTimeSeconds.HasValue)
-                    receiveMessageRequest.WaitTimeSeconds = param.WaitTimeSeconds.Value;
+                var waitTimeSeconds = param.WaitTimeSeconds ?? DefaultWaitTimeSeconds;
 
-                while (true)
+                ReceiveMessageRequest receiveMessageRequest = new ReceiveMessageRequest(SQS_URL);
+                receiveMessageRequest.MaxNumberOfMessages = MaxNumberOfMessagesPerReceive;
+                receiveMessageRequest.WaitTimeSeconds = waitTimeSeconds;
+
+                while (!cancellationToken.IsCancellationRequested)
                 {
                     try
                     {
                         var result = await amazonSQSClient.ReceiveMessageAsync(receiveMessageRequest, cancellationToken);
                         var Messages = result.Messages ?? new List<Message>();
-                        if (Messages.Count > 0)
+
+                        var messagesToDelete = new List<Message>(Messages.Count);
+                        foreach (var msg in Messages)
                         {
-                            foreach (var msg in Messages)
-                            {
-                                await ProcessAnyOfferChangedMessage(msg, messageReceiver, amazonSQSClient, SQS_URL, isDeleteNotificationAfterRead, cancellationToken).ConfigureAwait(false);
-                            }
+                            if (ProcessNotificationMessage(msg, messageReceiver, isDeleteNotificationAfterRead))
+                                messagesToDelete.Add(msg);
                         }
 
-                        if (Messages.Count < 10)
+                        await DeleteMessagesFromQueueAsync(amazonSQSClient, SQS_URL, messagesToDelete, messageReceiver, cancellationToken).ConfigureAwait(false);
+
+                        // Only back off on an empty queue, and only when the caller turned long
+                        // polling off - otherwise the receive call above already did the waiting.
+                        // Sleeping on any partial batch throttles exactly the case we care about,
+                        // a queue that has a backlog.
+                        if (Messages.Count == 0 && waitTimeSeconds <= 0)
                             await Task.Delay(1000 * 5, cancellationToken).ConfigureAwait(false);
+                    }
+                    catch (OperationCanceledException)
+                    {
+                        return;
                     }
                     catch (Exception ex)
                     {
@@ -165,7 +186,10 @@ namespace FikaAmazonAPI.Services
             }
         }
 
-        private static async Task ProcessAnyOfferChangedMessage(Message msg, IMessageReceiverWithResult messageReceiver, AmazonSQSClient amazonSQSClient, string SQS_URL, bool isDeleteNotificationAfterRead = true, CancellationToken cancellationToken = default)
+        /// <summary>
+        /// Hands one message to the receiver and reports whether it should be deleted.
+        /// </summary>
+        private static bool ProcessNotificationMessage(Message msg, IMessageReceiverWithResult messageReceiver, bool isDeleteNotificationAfterRead)
         {
             var deleteMessage = isDeleteNotificationAfterRead;
             try
@@ -173,22 +197,39 @@ namespace FikaAmazonAPI.Services
                 var data = DeserializeNotification(msg);
 
                 deleteMessage = messageReceiver.NewMessageRevicedTriger(data) || isDeleteNotificationAfterRead;
-
-                if (deleteMessage)
-                    await DeleteMessageFromQueueAsync(amazonSQSClient, SQS_URL, msg.ReceiptHandle, cancellationToken);
             }
             catch (Exception ex)
             {
                 messageReceiver.ErrorCatch(ex);
-
-                if (deleteMessage)
-                    await DeleteMessageFromQueueAsync(amazonSQSClient, SQS_URL, msg.ReceiptHandle, cancellationToken);
             }
+
+            return deleteMessage;
         }
-        private static async Task DeleteMessageFromQueueAsync(AmazonSQSClient sqsClient, string QueueUrl, string ReceiptHandle, CancellationToken cancellationToken = default)
+
+        /// <summary>
+        /// Deletes a whole receive batch with one API call instead of one call per message.
+        /// </summary>
+        private static async Task DeleteMessagesFromQueueAsync(AmazonSQSClient sqsClient, string QueueUrl, IList<Message> messages, IMessageReceiverWithResult messageReceiver, CancellationToken cancellationToken = default)
         {
-            var deleteMessageRequest = new DeleteMessageRequest() { QueueUrl = QueueUrl, ReceiptHandle = ReceiptHandle };
-            _ = await sqsClient.DeleteMessageAsync(deleteMessageRequest, cancellationToken);
+            if (messages == null || messages.Count == 0)
+                return;
+
+            var entries = new List<DeleteMessageBatchRequestEntry>(messages.Count);
+            for (var i = 0; i < messages.Count; i++)
+                entries.Add(new DeleteMessageBatchRequestEntry(i.ToString(), messages[i].ReceiptHandle));
+
+            var response = await sqsClient.DeleteMessageBatchAsync(
+                new DeleteMessageBatchRequest(QueueUrl, entries), cancellationToken).ConfigureAwait(false);
+
+            // A message that fails to delete stays invisible until its visibility timeout runs
+            // out and is then redelivered, so the caller needs to know about it.
+            if (response.Failed != null && response.Failed.Count > 0)
+            {
+                var failed = response.Failed[0];
+                messageReceiver.ErrorCatch(new AmazonSQSException(
+                    "Failed to delete " + response.Failed.Count + " of " + messages.Count +
+                    " message(s) from " + QueueUrl + ". First failure: " + failed.Code + " " + failed.Message));
+            }
         }
         private static NotificationMessageResponce DeserializeNotification(Message message)
         {

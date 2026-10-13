@@ -779,8 +779,6 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Services
 
         protected class AppIntegrationsApiUrls
         {
-            private readonly static string _resourceBaseUrl = "appIntegrations";
-
             #region V20240401
             private readonly static string _resourceBaseUrl_V20240401 = "appIntegrations/2024-04-01";
 

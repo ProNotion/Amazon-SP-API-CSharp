@@ -351,9 +351,9 @@ namespace FikaAmazonAPI.Services
         #endregion
 
 
-        public string CreateReportAndDownloadFile(ReportTypes reportType, DateTime? dataStartTime = null, DateTime? dataEndTime = null, ReportOptions reportOptions = null, bool isRestrictedReport = false, List<MarketPlace> marketplaces = null, int millisecondsDelay = 500) =>
+        public string CreateReportAndDownloadFile(ReportTypes reportType, DateTime? dataStartTime = null, DateTime? dataEndTime = null, ReportOptions? reportOptions = null, bool isRestrictedReport = false, List<MarketPlace>? marketplaces = null, int millisecondsDelay = 500) =>
             Task.Run(() => CreateReportAndDownloadFileAsync(reportType, dataStartTime, dataEndTime, reportOptions, isRestrictedReport, marketplaces, millisecondsDelay)).ConfigureAwait(false).GetAwaiter().GetResult();
-        public async Task<string> CreateReportAndDownloadFileAsync(ReportTypes reportType, DateTime? dataStartTime = null, DateTime? dataEndTime = null, ReportOptions reportOptions = null, bool isRestrictedReport = false, List<MarketPlace> marketplaces = null, int millisecondsDelay = 500, CancellationToken cancellationToken = default)
+        public async Task<string> CreateReportAndDownloadFileAsync(ReportTypes reportType, DateTime? dataStartTime = null, DateTime? dataEndTime = null, ReportOptions? reportOptions = null, bool isRestrictedReport = false, List<MarketPlace>? marketplaces = null, int millisecondsDelay = 500, CancellationToken cancellationToken = default)
         {
             if (!isRestrictedReport && Enum.TryParse<RestrictedReportTypes>(reportType.ToString(), out _))
             {
@@ -387,10 +387,10 @@ namespace FikaAmazonAPI.Services
 
         }
 
-        public MemoryStream CreateReportAndDownloadFileStream(ReportTypes reportType, DateTime? dataStartTime = null, DateTime? dataEndTime = null, ReportOptions reportOptions = null, bool isRestrictedReport = false, List<MarketPlace> marketplaces = null, int millisecondsDelay = 500) =>
+        public MemoryStream CreateReportAndDownloadFileStream(ReportTypes reportType, DateTime? dataStartTime = null, DateTime? dataEndTime = null, ReportOptions? reportOptions = null, bool isRestrictedReport = false, List<MarketPlace>? marketplaces = null, int millisecondsDelay = 500) =>
             Task.Run(() => CreateReportAndDownloadFileStreamAsync(reportType, dataStartTime, dataEndTime, reportOptions, isRestrictedReport, marketplaces, millisecondsDelay)).ConfigureAwait(false).GetAwaiter().GetResult();
 
-        public async Task<MemoryStream> CreateReportAndDownloadFileStreamAsync(ReportTypes reportType, DateTime? dataStartTime = null, DateTime? dataEndTime = null, ReportOptions reportOptions = null, bool isRestrictedReport = false, List<MarketPlace> marketplaces = null, int millisecondsDelay = 500, CancellationToken cancellationToken = default)
+        public async Task<MemoryStream> CreateReportAndDownloadFileStreamAsync(ReportTypes reportType, DateTime? dataStartTime = null, DateTime? dataEndTime = null, ReportOptions? reportOptions = null, bool isRestrictedReport = false, List<MarketPlace>? marketplaces = null, int millisecondsDelay = 500, CancellationToken cancellationToken = default)
         {
             if (!isRestrictedReport && Enum.TryParse<RestrictedReportTypes>(reportType.ToString(), out _))
             {

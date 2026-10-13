@@ -69,13 +69,13 @@ namespace FikaAmazonAPI.SampleCode
             string awsAccessKeyId,
             string awsSecretAccessKey,
             RegionEndpoint region,
-            IClientSecretStore store = null)
+            IClientSecretStore? store = null)
         {
             // The onRotated callback fires AFTER the secret has been applied to the live
             // AmazonCredential, so the running connection already uses the new secret by
             // the time we persist. Wrap the IO call so a DB outage doesn't kill the SQS
             // consumer loop — the SDK has already kept the in-memory credential current.
-            Action<ApplicationOAuthClientNewSecretNotification> persist = null;
+            Action<ApplicationOAuthClientNewSecretNotification>? persist = null;
             if (store != null)
             {
                 persist = payload =>

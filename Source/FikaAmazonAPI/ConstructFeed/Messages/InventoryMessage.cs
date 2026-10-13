@@ -15,7 +15,7 @@ namespace FikaAmazonAPI.ConstructFeed.Messages
         [XmlElement(DataType = "date")]
         public DateTime? RestockDate { get; set; }
 
-        public string FulfillmentLatency { get; set; }
+        public string? FulfillmentLatency { get; set; }
 
         public InventorySwitchFulfillmentTo? SwitchFulfillmentTo { get; set; }
 

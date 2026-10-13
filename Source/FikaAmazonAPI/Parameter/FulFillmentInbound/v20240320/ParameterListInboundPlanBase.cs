@@ -4,6 +4,6 @@
     public class ParameterListInboundPlanBase : PaginationParameter
     {
         public string InboundPlanId { get; set; }
-        public string PaginationToken { get; set; }
+        public string? PaginationToken { get; set; }
     }
 }

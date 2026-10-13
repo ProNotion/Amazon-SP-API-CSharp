@@ -38,7 +38,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.CatalogItems.V20220401
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as ItemImages);
+            return this.Equals(input as ItemContributors);
         }
 
         /// <summary>

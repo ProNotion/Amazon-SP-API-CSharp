@@ -84,7 +84,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Feeds
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as GetFeedsResponse);
+            return this.Equals(input as GetFeedsResponseV00);
         }
 
         /// <summary>

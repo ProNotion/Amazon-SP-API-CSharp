@@ -41,7 +41,7 @@ namespace FikaAmazonAPI
         }
 
         public AmazonCredential(string AccessKey, string SecretKey, string RoleArn, string ClientId,
-            string ClientSecret, string RefreshToken, string ProxyAddress = null)
+            string ClientSecret, string RefreshToken, string? ProxyAddress = null)
         {
             this.AccessKey = AccessKey;
             this.SecretKey = SecretKey;

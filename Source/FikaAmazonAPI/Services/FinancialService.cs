@@ -54,9 +54,9 @@ namespace FikaAmazonAPI.Services
             return response.Payload;
         }
 
-        public List<FinancialEvents> ListFinancialEventsByGroupId(string eventGroupId, ParameterListFinancialEventsByGroupId parameterListFinancialEventsByGroupId = null) =>
+        public List<FinancialEvents> ListFinancialEventsByGroupId(string eventGroupId, ParameterListFinancialEventsByGroupId? parameterListFinancialEventsByGroupId = null) =>
                 Task.Run(() => ListFinancialEventsByGroupIdAsync(eventGroupId, parameterListFinancialEventsByGroupId)).ConfigureAwait(false).GetAwaiter().GetResult();
-        public async Task<List<FinancialEvents>> ListFinancialEventsByGroupIdAsync(string eventGroupId, ParameterListFinancialEventsByGroupId parameterListFinancialEventsByGroupId = null, 
+        public async Task<List<FinancialEvents>> ListFinancialEventsByGroupIdAsync(string eventGroupId, ParameterListFinancialEventsByGroupId? parameterListFinancialEventsByGroupId = null, 
             CancellationToken cancellationToken = default)
         {
             var parameters = parameterListFinancialEventsByGroupId?.getParameters() ?? new List<KeyValuePair<string, string>>();

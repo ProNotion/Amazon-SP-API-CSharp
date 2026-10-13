@@ -36,7 +36,8 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ListingsItems
         /// <param name="asin">Amazon Standard Identification Number (ASIN) of the listings item.</param>
         public AsinIdentifier(string marketplaceId = default(string), string asin = default(string))
         {
-
+            this.MarketplaceId = marketplaceId;
+            this.Asin = asin;
         }
 
         /// <summary>

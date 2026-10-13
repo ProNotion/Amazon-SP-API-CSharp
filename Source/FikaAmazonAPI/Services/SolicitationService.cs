@@ -15,18 +15,18 @@ namespace FikaAmazonAPI.Services
         }
 
 
-        public GetSolicitationActionsForOrderResponseEmbedded GetSolicitationActionsForOrder(string orderId, List<KeyValuePair<string, string>> queryParameters = null) =>
+        public GetSolicitationActionsForOrderResponseEmbedded GetSolicitationActionsForOrder(string orderId, List<KeyValuePair<string, string>>? queryParameters = null) =>
             Task.Run(() => GetSolicitationActionsForOrderAsync(orderId, queryParameters)).ConfigureAwait(false).GetAwaiter().GetResult();
-        public async Task<GetSolicitationActionsForOrderResponseEmbedded> GetSolicitationActionsForOrderAsync(string orderId, List<KeyValuePair<string, string>> queryParameters = null, CancellationToken cancellationToken = default)
+        public async Task<GetSolicitationActionsForOrderResponseEmbedded> GetSolicitationActionsForOrderAsync(string orderId, List<KeyValuePair<string, string>>? queryParameters = null, CancellationToken cancellationToken = default)
         {
             await CreateAuthorizedRequestAsync(SolicitationsApiUrls.GetSolicitationActionsForOrder(orderId), RestSharp.Method.Get, queryParameters, cancellationToken: cancellationToken);
             var response = await ExecuteRequestAsync<GetSolicitationActionsForOrderResponse>(RateLimitType.Solicitations_GetSolicitationActionsForOrder, cancellationToken);
             return response.Embedded;
         }
 
-        public GetSolicitationActionsForOrderResponseEmbedded CreateProductReviewAndSellerFeedbackSolicitation(string orderId, List<KeyValuePair<string, string>> queryParameters = null) =>
+        public GetSolicitationActionsForOrderResponseEmbedded CreateProductReviewAndSellerFeedbackSolicitation(string orderId, List<KeyValuePair<string, string>>? queryParameters = null) =>
             Task.Run(() => CreateProductReviewAndSellerFeedbackSolicitationAsync(orderId, queryParameters)).ConfigureAwait(false).GetAwaiter().GetResult();
-        public async Task<GetSolicitationActionsForOrderResponseEmbedded> CreateProductReviewAndSellerFeedbackSolicitationAsync(string orderId, List<KeyValuePair<string, string>> queryParameters = null, CancellationToken cancellationToken = default)
+        public async Task<GetSolicitationActionsForOrderResponseEmbedded> CreateProductReviewAndSellerFeedbackSolicitationAsync(string orderId, List<KeyValuePair<string, string>>? queryParameters = null, CancellationToken cancellationToken = default)
         {
             await CreateAuthorizedRequestAsync(SolicitationsApiUrls.CreateProductReviewAndSellerFeedbackSolicitation(orderId), RestSharp.Method.Post, queryParameters, cancellationToken: cancellationToken);
             var response = await ExecuteRequestAsync<GetSolicitationActionsForOrderResponse>(RateLimitType.Solicitations_CreateProductReviewAndSellerFeedbackSolicitation, cancellationToken);

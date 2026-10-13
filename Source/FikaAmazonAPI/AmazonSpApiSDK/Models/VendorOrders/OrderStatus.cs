@@ -131,7 +131,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.VendorOrders
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as Order);
+            return this.Equals(input as OrderStatus);
         }
 
         /// <summary>

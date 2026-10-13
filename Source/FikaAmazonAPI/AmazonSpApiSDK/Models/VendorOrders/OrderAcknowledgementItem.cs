@@ -30,6 +30,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.VendorOrders
             }
             ItemSequenceNumber = itemSequenceNumber;
             AmazonProductIdentifier = amazonProductIdentifier;
+            VendorProductIdentifier = vendorProductIdentifier;
             NetCost = netCost;
             ListPrice = listPrice;
             DiscountMultiplier = discountMultiplier;

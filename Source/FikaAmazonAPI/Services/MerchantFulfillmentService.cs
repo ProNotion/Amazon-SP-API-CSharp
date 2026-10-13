@@ -43,9 +43,9 @@ namespace FikaAmazonAPI.Services
             return null;
         }
 
-        public Shipment GetShipment(string shipmentId, IParameterBasedPII ParameterBasedPII = null) =>
+        public Shipment GetShipment(string shipmentId, IParameterBasedPII? ParameterBasedPII = null) =>
             Task.Run(() => GetShipmentAsync(shipmentId, ParameterBasedPII = null)).ConfigureAwait(false).GetAwaiter().GetResult();
-        public async Task<Shipment> GetShipmentAsync(string shipmentId, IParameterBasedPII ParameterBasedPII = null, CancellationToken cancellationToken = default)
+        public async Task<Shipment> GetShipmentAsync(string shipmentId, IParameterBasedPII? ParameterBasedPII = null, CancellationToken cancellationToken = default)
         {
             if (ParameterBasedPII != null && ParameterBasedPII.IsNeedRestrictedDataToken && ParameterBasedPII.RestrictedDataTokenRequest == null)
             {
@@ -67,9 +67,9 @@ namespace FikaAmazonAPI.Services
                 return response.Payload;
             return null;
         }
-        public Shipment CancelShipment(string shipmentId, IParameterBasedPII parameterBasedPII = null) =>
+        public Shipment CancelShipment(string shipmentId, IParameterBasedPII? parameterBasedPII = null) =>
             Task.Run(() => CancelShipmentAsync(shipmentId, parameterBasedPII)).ConfigureAwait(false).GetAwaiter().GetResult();
-        public async Task<Shipment> CancelShipmentAsync(string shipmentId, IParameterBasedPII parameterBasedPII = null, CancellationToken cancellationToken = default)
+        public async Task<Shipment> CancelShipmentAsync(string shipmentId, IParameterBasedPII? parameterBasedPII = null, CancellationToken cancellationToken = default)
         {
             if (parameterBasedPII != null && parameterBasedPII.IsNeedRestrictedDataToken && parameterBasedPII.RestrictedDataTokenRequest == null)
             {
@@ -92,9 +92,9 @@ namespace FikaAmazonAPI.Services
             return null;
         }
 
-        public Shipment CancelShipmentOld(string shipmentId, IParameterBasedPII parameterBasedPII = null) =>
+        public Shipment CancelShipmentOld(string shipmentId, IParameterBasedPII? parameterBasedPII = null) =>
             Task.Run(() => CancelShipmentOldAsync(shipmentId, parameterBasedPII)).ConfigureAwait(false).GetAwaiter().GetResult();
-        public async Task<Shipment> CancelShipmentOldAsync(string shipmentId, IParameterBasedPII parameterBasedPII = null, CancellationToken cancellationToken = default)
+        public async Task<Shipment> CancelShipmentOldAsync(string shipmentId, IParameterBasedPII? parameterBasedPII = null, CancellationToken cancellationToken = default)
         {
             if (parameterBasedPII != null && parameterBasedPII.IsNeedRestrictedDataToken && parameterBasedPII.RestrictedDataTokenRequest == null)
             {
@@ -117,9 +117,9 @@ namespace FikaAmazonAPI.Services
             return null;
         }
 
-        public Shipment CreateShipment(CreateShipmentRequest createShipmentRequest, IParameterBasedPII parameterBasedPII = null) =>
+        public Shipment CreateShipment(CreateShipmentRequest createShipmentRequest, IParameterBasedPII? parameterBasedPII = null) =>
             Task.Run(() => CreateShipmentAsync(createShipmentRequest, parameterBasedPII)).ConfigureAwait(false).GetAwaiter().GetResult();
-        public async Task<Shipment> CreateShipmentAsync(CreateShipmentRequest createShipmentRequest, IParameterBasedPII parameterBasedPII = null, CancellationToken cancellationToken = default)
+        public async Task<Shipment> CreateShipmentAsync(CreateShipmentRequest createShipmentRequest, IParameterBasedPII? parameterBasedPII = null, CancellationToken cancellationToken = default)
         {
             if (parameterBasedPII != null && parameterBasedPII.IsNeedRestrictedDataToken && parameterBasedPII.RestrictedDataTokenRequest == null)
             {

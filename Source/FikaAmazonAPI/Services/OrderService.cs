@@ -199,9 +199,9 @@ namespace FikaAmazonAPI.Services
                 return response.Payload;
             else return null;
         }
-        public OrderItemList GetOrderItems(string orderId, IParameterBasedPII parameterBasedPII = null) =>
+        public OrderItemList GetOrderItems(string orderId, IParameterBasedPII? parameterBasedPII = null) =>
             Task.Run(() => GetOrderItemsAsync(orderId, parameterBasedPII)).ConfigureAwait(false).GetAwaiter().GetResult();
-        public async Task<OrderItemList> GetOrderItemsAsync(string orderId, IParameterBasedPII ParameterBasedPII = null, CancellationToken cancellationToken = default)
+        public async Task<OrderItemList> GetOrderItemsAsync(string orderId, IParameterBasedPII? ParameterBasedPII = null, CancellationToken cancellationToken = default)
         {
             var orderItemList = new OrderItemList();
 
@@ -247,9 +247,9 @@ namespace FikaAmazonAPI.Services
             return response.Payload;
         }
 
-        public OrderBuyerInfo GetOrderBuyerInfo(string orderId, List<KeyValuePair<string, string>> queryParameters = null) =>
+        public OrderBuyerInfo GetOrderBuyerInfo(string orderId, List<KeyValuePair<string, string>>? queryParameters = null) =>
             Task.Run(() => GetOrderBuyerInfoAsync(orderId, queryParameters)).ConfigureAwait(false).GetAwaiter().GetResult();
-        public async Task<OrderBuyerInfo> GetOrderBuyerInfoAsync(string orderId, List<KeyValuePair<string, string>> queryParameters = null, CancellationToken cancellationToken = default)
+        public async Task<OrderBuyerInfo> GetOrderBuyerInfoAsync(string orderId, List<KeyValuePair<string, string>>? queryParameters = null, CancellationToken cancellationToken = default)
         {
             await CreateAuthorizedRequestAsync(OrdersApiUrls.OrderBuyerInfo(orderId), RestSharp.Method.Get, queryParameters, cancellationToken: cancellationToken);
             var response = await ExecuteRequestAsync<GetOrderBuyerInfoResponse>(Utils.RateLimitType.Order_GetOrderBuyerInfo, cancellationToken);

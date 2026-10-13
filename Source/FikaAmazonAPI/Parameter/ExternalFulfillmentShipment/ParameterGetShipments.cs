@@ -45,7 +45,7 @@ namespace FikaAmazonAPI.Parameter.ExternalFulfillmentShipment
         /// <summary>
         /// A token that you use to retrieve the next page of results. The response includes nextToken when there are multiple pages of results.
         /// </summary>
-        public string PaginationToken { get; set; }
+        public string? PaginationToken { get; set; }
 
         /// <summary>
         /// Maximum number of pages to return. When null, all pages are fetched.

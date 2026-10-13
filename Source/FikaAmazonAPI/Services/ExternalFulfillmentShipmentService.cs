@@ -126,10 +126,10 @@ namespace FikaAmazonAPI.Services
             return await ExecuteRequestAsync<ShippingOptionsResponse>(RateLimitType.ExternalFulfillmentShipment_RetrieveShippingOptions, ct);
         }
 
-        public ShipLabelsResponse GenerateShipLabels(string shipmentId, GenerateShipLabelsOperation operation, ShipLabelsInput body, string shippingOptionId = null) =>
+        public ShipLabelsResponse GenerateShipLabels(string shipmentId, GenerateShipLabelsOperation operation, ShipLabelsInput body, string? shippingOptionId = null) =>
             Task.Run(() => GenerateShipLabelsAsync(shipmentId, operation, body, shippingOptionId)).ConfigureAwait(false).GetAwaiter().GetResult();
 
-        public async Task<ShipLabelsResponse> GenerateShipLabelsAsync(string shipmentId, GenerateShipLabelsOperation operation, ShipLabelsInput body, string shippingOptionId = null, CancellationToken ct = default)
+        public async Task<ShipLabelsResponse> GenerateShipLabelsAsync(string shipmentId, GenerateShipLabelsOperation operation, ShipLabelsInput body, string? shippingOptionId = null, CancellationToken ct = default)
         {
             var query = new List<KeyValuePair<string, string>> { new KeyValuePair<string, string>("operation", operation.ToString()) };
 

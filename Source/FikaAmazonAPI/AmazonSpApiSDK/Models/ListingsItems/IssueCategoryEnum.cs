@@ -71,5 +71,17 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ListingsItems
         /// </summary>
         [EnumMember(Value = "QUALIFICATION_REQUIRED")]
         QUALIFICATION_REQUIRED = 8,
+
+        /// <summary>
+        /// Enum PRODUCT for value: PRODUCT
+        /// </summary>
+        [EnumMember(Value = "PRODUCT")]
+        PRODUCT = 9,
+
+        /// <summary>
+        /// Enum LISTING for value: LISTING
+        /// </summary>
+        [EnumMember(Value = "LISTING")]
+        LISTING = 10,
     }
 }

@@ -217,14 +217,10 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
-                if (this.EarliestShipDate != null)
-                    hashCode = hashCode * 59 + this.EarliestShipDate.GetHashCode();
-                if (this.LatestShipDate != null)
-                    hashCode = hashCode * 59 + this.LatestShipDate.GetHashCode();
-                if (this.EarliestArrivalDate != null)
-                    hashCode = hashCode * 59 + this.EarliestArrivalDate.GetHashCode();
-                if (this.LatestArrivalDate != null)
-                    hashCode = hashCode * 59 + this.LatestArrivalDate.GetHashCode();
+                hashCode = hashCode * 59 + this.EarliestShipDateTime.GetHashCode();
+                hashCode = hashCode * 59 + this.LatestShipDateTime.GetHashCode();
+                hashCode = hashCode * 59 + this.EarliestArrivalDateTime.GetHashCode();
+                hashCode = hashCode * 59 + this.LatestArrivalDateTime.GetHashCode();
                 if (this.FulfillmentPreviewItems != null)
                     hashCode = hashCode * 59 + this.FulfillmentPreviewItems.GetHashCode();
                 return hashCode;

@@ -36,7 +36,8 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ListingsItems
         /// <param name="displayName">Localized display name for the audience.</param>
         public Audience(OfferAudienceEnum? value = default(OfferAudienceEnum?), string displayName = default(string))
         {
-
+            this.Value = value;
+            this.DisplayName = displayName;
         }
 
         /// <summary>

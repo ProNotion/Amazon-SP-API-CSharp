@@ -105,12 +105,12 @@ namespace FikaAmazonAPI.Services
 
         [Obsolete("Catalog Items API v0 was removed by Amazon on 2025-03-31; this call will fail at runtime. The 2022-04-01 version of the API does not expose a categories endpoint.", false)]
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public IList<Categories> ListCatalogCategories(string ASIN, string SellerSKU = null, string MarketPlaceID = null) =>
+        public IList<Categories> ListCatalogCategories(string ASIN, string? SellerSKU = null, string? MarketPlaceID = null) =>
                     Task.Run(() => ListCatalogCategoriesAsync(ASIN, SellerSKU, MarketPlaceID)).ConfigureAwait(false).GetAwaiter().GetResult();
 
         [Obsolete("Catalog Items API v0 was removed by Amazon on 2025-03-31; this call will fail at runtime. The 2022-04-01 version of the API does not expose a categories endpoint.", false)]
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public async Task<IList<Categories>> ListCatalogCategoriesAsync(string ASIN, string SellerSKU = null, string MarketPlaceID = null, CancellationToken cancellationToken = default)
+        public async Task<IList<Categories>> ListCatalogCategoriesAsync(string ASIN, string? SellerSKU = null, string? MarketPlaceID = null, CancellationToken cancellationToken = default)
         {
             if (string.IsNullOrEmpty(ASIN))
                 throw new InvalidDataException("ASIN is a required property and cannot be null or empty");

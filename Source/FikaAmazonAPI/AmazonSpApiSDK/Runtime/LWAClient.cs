@@ -20,7 +20,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Runtime
         public LWAAuthorizationCredentials LWAAuthorizationCredentials { get; private set; }
 
 
-        public LWAClient(LWAAuthorizationCredentials lwaAuthorizationCredentials, IWebProxy proxy = null)
+        public LWAClient(LWAAuthorizationCredentials lwaAuthorizationCredentials, IWebProxy? proxy = null)
         {
 
             LWAAuthorizationCredentials = lwaAuthorizationCredentials;

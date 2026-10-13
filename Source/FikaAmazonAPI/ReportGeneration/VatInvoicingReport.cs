@@ -222,8 +222,6 @@ namespace FikaAmazonAPI.ReportGeneration
 
             row.refNumber = refNumber;
             return row;
-
-            return row;
         }
     }
 }

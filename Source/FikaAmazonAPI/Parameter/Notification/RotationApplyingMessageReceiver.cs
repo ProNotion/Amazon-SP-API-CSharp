@@ -33,7 +33,7 @@ namespace FikaAmazonAPI.Parameter.Notification
         public RotationApplyingMessageReceiver(
             IMessageReceiverWithResult inner,
             AmazonCredential credentials,
-            Action<ApplicationOAuthClientNewSecretNotification> onRotated = null)
+            Action<ApplicationOAuthClientNewSecretNotification>? onRotated = null)
         {
             _inner = inner ?? throw new ArgumentNullException(nameof(inner));
             _credentials = credentials ?? throw new ArgumentNullException(nameof(credentials));
@@ -48,7 +48,7 @@ namespace FikaAmazonAPI.Parameter.Notification
         public RotationApplyingMessageReceiver(
             IMessageReceiver inner,
             AmazonCredential credentials,
-            Action<ApplicationOAuthClientNewSecretNotification> onRotated = null)
+            Action<ApplicationOAuthClientNewSecretNotification>? onRotated = null)
             : this(new VoidToBoolAdapter(inner), credentials, onRotated)
         {
         }
