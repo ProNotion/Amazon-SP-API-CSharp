@@ -122,6 +122,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Support
                 (
                     this.Events == input.Events ||
                     this.Events != null &&
+                    input.Events != null &&
                     this.Events.SequenceEqual(input.Events)
                 ) && 
                 (

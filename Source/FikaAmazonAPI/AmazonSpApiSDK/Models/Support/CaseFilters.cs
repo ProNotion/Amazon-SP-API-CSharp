@@ -184,6 +184,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Support
                 (
                     this.CaseStatuses == input.CaseStatuses ||
                     this.CaseStatuses != null &&
+                    input.CaseStatuses != null &&
                     this.CaseStatuses.SequenceEqual(input.CaseStatuses)
                 ) && 
                 (
@@ -204,11 +205,13 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Support
                 (
                     this.PrimaryEmails == input.PrimaryEmails ||
                     this.PrimaryEmails != null &&
+                    input.PrimaryEmails != null &&
                     this.PrimaryEmails.SequenceEqual(input.PrimaryEmails)
                 ) && 
                 (
                     this.CcEmails == input.CcEmails ||
                     this.CcEmails != null &&
+                    input.CcEmails != null &&
                     this.CcEmails.SequenceEqual(input.CcEmails)
                 ) && 
                 (

@@ -59,6 +59,18 @@ namespace Tests
         }
 
         [Test]
+        public void Equals_ReturnsFalseWhenOnlyOneSideHasAList()
+        {
+            var timestamp = new DateTime(2024, 1, 12, 11, 0, 0, DateTimeKind.Utc);
+            var withAttachments = new ChatEvent(timestamp: timestamp, type: ChatEvent.TypeEnum.ATTACHMENT,
+                attachments: new List<Attachment> { new Attachment(name: "file.txt") });
+            var withoutAttachments = new ChatEvent(timestamp: timestamp, type: ChatEvent.TypeEnum.ATTACHMENT);
+
+            Assert.That(withAttachments.Equals(withoutAttachments), Is.False);
+            Assert.That(withoutAttachments.Equals(withAttachments), Is.False);
+        }
+
+        [Test]
         public void ParameterListCases_SerialisesToAmazonRequestBody()
         {
             var parameter = new ParameterListCases

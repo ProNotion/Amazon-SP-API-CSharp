@@ -119,6 +119,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Support
                 (
                     this.Contacts == input.Contacts ||
                     this.Contacts != null &&
+                    input.Contacts != null &&
                     this.Contacts.SequenceEqual(input.Contacts)
                 );
         }
