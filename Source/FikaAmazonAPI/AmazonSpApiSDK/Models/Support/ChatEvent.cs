@@ -207,6 +207,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Support
                 (
                     this.Attachments == input.Attachments ||
                     this.Attachments != null &&
+                    input.Attachments != null &&
                     this.Attachments.SequenceEqual(input.Attachments)
                 );
         }

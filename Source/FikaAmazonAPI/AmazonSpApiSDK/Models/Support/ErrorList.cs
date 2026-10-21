@@ -104,6 +104,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Support
                 (
                     this.Errors == input.Errors ||
                     this.Errors != null &&
+                    input.Errors != null &&
                     this.Errors.SequenceEqual(input.Errors)
                 );
         }

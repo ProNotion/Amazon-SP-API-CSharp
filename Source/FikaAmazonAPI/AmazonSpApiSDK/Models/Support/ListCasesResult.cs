@@ -119,6 +119,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Support
                 (
                     this.Cases == input.Cases ||
                     this.Cases != null &&
+                    input.Cases != null &&
                     this.Cases.SequenceEqual(input.Cases)
                 );
         }

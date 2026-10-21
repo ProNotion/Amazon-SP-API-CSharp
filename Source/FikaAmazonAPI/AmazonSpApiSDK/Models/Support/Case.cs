@@ -275,11 +275,13 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Support
                 (
                     this.CcEmails == input.CcEmails ||
                     this.CcEmails != null &&
+                    input.CcEmails != null &&
                     this.CcEmails.SequenceEqual(input.CcEmails)
                 ) && 
                 (
                     this.Appointments == input.Appointments ||
                     this.Appointments != null &&
+                    input.Appointments != null &&
                     this.Appointments.SequenceEqual(input.Appointments)
                 ) && 
                 (
